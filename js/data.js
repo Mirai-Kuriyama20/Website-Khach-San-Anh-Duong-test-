@@ -323,5 +323,41 @@ window.ANH_DUONG_DATA = {
       createdAt: "2026-10-07T16:45:00.000Z",
       notes: "Yêu cầu phòng hướng biển tầng cao"
     }
+  ],
+
+  users: [
+    {
+      id: "usr-admin-1",
+      email: "admin@anhduonghotel.vn",
+      password: "admin",
+      fullName: "Thẩm Anh Minh",
+      phone: "0912345678",
+      role: "admin",
+      roleLabel: "Quản Trị Viên (Admin)",
+      points: 2500,
+      tier: "Diamond VIP"
+    },
+    {
+      id: "usr-recep-1",
+      email: "reception@anhduonghotel.vn",
+      password: "reception",
+      fullName: "Nguyễn Ngọc Anh",
+      phone: "0987654321",
+      role: "receptionist",
+      roleLabel: "Lễ Tân Trưởng (Receptionist)",
+      points: 1200,
+      tier: "Gold VIP"
+    },
+    {
+      id: "usr-guest-1",
+      email: "khachhang@gmail.com",
+      password: "khach",
+      fullName: "Trần Hoàng Long",
+      phone: "0905123456",
+      role: "customer",
+      roleLabel: "Thành Viên VIP (Customer)",
+      points: 850,
+      tier: "Gold VIP"
+    }
   ]
 };

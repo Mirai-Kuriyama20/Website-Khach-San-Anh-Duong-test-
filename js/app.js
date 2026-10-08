@@ -2,7 +2,10 @@
 (function () {
   // State management using LocalStorage
   const STORAGE_KEYS = {
+    HOTEL_INFO: 'anhduong_hotel_info',
+    ROOM_TYPES: 'anhduong_room_types_data',
     ROOMS: 'anhduong_rooms_data',
+    SERVICES: 'anhduong_services_data',
     BOOKINGS: 'anhduong_bookings_data',
     CURRENT_SEARCH: 'anhduong_search_state'
   };
@@ -12,12 +15,27 @@
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
   }
 
-  // Load or initialize data
+  // Load or initialize data from localStorage / window.ANH_DUONG_DATA
+  let hotelInfo = JSON.parse(localStorage.getItem(STORAGE_KEYS.HOTEL_INFO)) || window.ANH_DUONG_DATA.hotelInfo;
+  let roomTypesData = JSON.parse(localStorage.getItem(STORAGE_KEYS.ROOM_TYPES)) || window.ANH_DUONG_DATA.roomTypes;
   let roomsData = JSON.parse(localStorage.getItem(STORAGE_KEYS.ROOMS)) || window.ANH_DUONG_DATA.rooms;
+  let servicesData = JSON.parse(localStorage.getItem(STORAGE_KEYS.SERVICES)) || window.ANH_DUONG_DATA.services;
   let bookingsData = JSON.parse(localStorage.getItem(STORAGE_KEYS.BOOKINGS)) || window.ANH_DUONG_DATA.initialBookings;
+
+  function saveHotelInfo() {
+    localStorage.setItem(STORAGE_KEYS.HOTEL_INFO, JSON.stringify(hotelInfo));
+  }
+
+  function saveRoomTypes() {
+    localStorage.setItem(STORAGE_KEYS.ROOM_TYPES, JSON.stringify(roomTypesData));
+  }
 
   function saveRooms() {
     localStorage.setItem(STORAGE_KEYS.ROOMS, JSON.stringify(roomsData));
+  }
+
+  function saveServices() {
+    localStorage.setItem(STORAGE_KEYS.SERVICES, JSON.stringify(servicesData));
   }
 
   function saveBookings() {
@@ -45,29 +63,137 @@
       toast.className = 'fixed bottom-5 right-5 z-50 flex items-center px-5 py-3 rounded-xl shadow-2xl text-white bg-slate-800 transition-all duration-300 transform translate-y-12 opacity-0 pointer-events-none';
     }, 4000);
   }
+  window.showToast = showToast;
+
+  // 0. Render Hotel Info throughout the page
+  function renderHotelInfo() {
+    // Top bar & Header
+    document.querySelectorAll('.hotel-name-text').forEach(el => el.textContent = hotelInfo.name);
+    document.querySelectorAll('.hotel-brand-text').forEach(el => el.textContent = hotelInfo.brand);
+    document.querySelectorAll('.hotel-address-text').forEach(el => el.textContent = hotelInfo.address);
+    document.querySelectorAll('.hotel-hotline-text').forEach(el => el.textContent = hotelInfo.hotline);
+    document.querySelectorAll('.hotel-phone-text').forEach(el => el.textContent = hotelInfo.phone);
+    document.querySelectorAll('.hotel-email-text').forEach(el => el.textContent = hotelInfo.email);
+    document.querySelectorAll('.hotel-desc-text').forEach(el => el.textContent = hotelInfo.description);
+    
+    // Bank QR Card
+    const bankNameEl = document.getElementById('hotel-bank-name');
+    const bankAccEl = document.getElementById('hotel-bank-acc');
+    const bankOwnerEl = document.getElementById('hotel-bank-owner');
+    if (bankNameEl) bankNameEl.textContent = hotelInfo.bankName;
+    if (bankAccEl) bankAccEl.textContent = hotelInfo.bankAccount;
+    if (bankOwnerEl) bankOwnerEl.textContent = hotelInfo.bankAccountName;
+
+    // Admin Hotel Edit Form inputs
+    const fName = document.getElementById('edit-hotel-name');
+    const fBrand = document.getElementById('edit-hotel-brand');
+    const fAddress = document.getElementById('edit-hotel-address');
+    const fPhone = document.getElementById('edit-hotel-phone');
+    const fHotline = document.getElementById('edit-hotel-hotline');
+    const fEmail = document.getElementById('edit-hotel-email');
+    const fBookingEmail = document.getElementById('edit-hotel-booking-email');
+    const fCheckIn = document.getElementById('edit-hotel-checkin');
+    const fCheckOut = document.getElementById('edit-hotel-checkout');
+    const fBankName = document.getElementById('edit-hotel-bank-name');
+    const fBankAccount = document.getElementById('edit-hotel-bank-acc');
+    const fBankOwner = document.getElementById('edit-hotel-bank-owner');
+    const fDesc = document.getElementById('edit-hotel-desc');
+
+    if (fName) fName.value = hotelInfo.name || '';
+    if (fBrand) fBrand.value = hotelInfo.brand || '';
+    if (fAddress) fAddress.value = hotelInfo.address || '';
+    if (fPhone) fPhone.value = hotelInfo.phone || '';
+    if (fHotline) fHotline.value = hotelInfo.hotline || '';
+    if (fEmail) fEmail.value = hotelInfo.email || '';
+    if (fBookingEmail) fBookingEmail.value = hotelInfo.bookingEmail || '';
+    if (fCheckIn) fCheckIn.value = hotelInfo.checkInTime || '14:00';
+    if (fCheckOut) fCheckOut.value = hotelInfo.checkOutTime || '12:00';
+    if (fBankName) fBankName.value = hotelInfo.bankName || '';
+    if (fBankAccount) fBankAccount.value = hotelInfo.bankAccount || '';
+    if (fBankOwner) fBankOwner.value = hotelInfo.bankAccountName || '';
+    if (fDesc) fDesc.value = hotelInfo.description || '';
+  }
+
+  // Handle Save Hotel Info
+  window.handleSaveHotelInfo = function (e) {
+    e.preventDefault();
+
+    hotelInfo = {
+      ...hotelInfo,
+      name: document.getElementById('edit-hotel-name').value.trim() || 'Khách Sạn Ánh Dương',
+      brand: document.getElementById('edit-hotel-brand').value.trim() || 'Luxury Hotel & Resort',
+      address: document.getElementById('edit-hotel-address').value.trim(),
+      phone: document.getElementById('edit-hotel-phone').value.trim(),
+      hotline: document.getElementById('edit-hotel-hotline').value.trim(),
+      email: document.getElementById('edit-hotel-email').value.trim(),
+      bookingEmail: document.getElementById('edit-hotel-booking-email').value.trim(),
+      checkInTime: document.getElementById('edit-hotel-checkin').value.trim() || '14:00',
+      checkOutTime: document.getElementById('edit-hotel-checkout').value.trim() || '12:00',
+      bankName: document.getElementById('edit-hotel-bank-name').value.trim(),
+      bankAccount: document.getElementById('edit-hotel-bank-acc').value.trim(),
+      bankAccountName: document.getElementById('edit-hotel-bank-owner').value.trim(),
+      description: document.getElementById('edit-hotel-desc').value.trim()
+    };
+
+    saveHotelInfo();
+    renderHotelInfo();
+    updateBookingCalculations();
+    showToast('Đã lưu và cập nhật thông tin khách sạn thành công!');
+  };
+
+  // Reset Hotel Info to default
+  window.handleResetHotelInfo = function () {
+    if (!confirm('Bạn có chắc chắn muốn khôi phục thông tin khách sạn về mặc định không?')) return;
+    hotelInfo = { ...window.ANH_DUONG_DATA.hotelInfo };
+    saveHotelInfo();
+    renderHotelInfo();
+    updateBookingCalculations();
+    showToast('Đã khôi phục thông tin khách sạn mặc định!');
+  };
 
   // 1. Render Rooms List
   function renderRooms(filterType = 'all') {
     const container = document.getElementById('rooms-container');
     if (!container) return;
 
-    let types = window.ANH_DUONG_DATA.roomTypes;
+    let types = roomTypesData;
     if (filterType !== 'all') {
       types = types.filter(t => t.id === filterType);
     }
 
+    if (types.length === 0) {
+      container.innerHTML = `
+        <div class="col-span-full py-12 text-center bg-white rounded-3xl border border-slate-200">
+          <i class="fa-solid fa-bed text-4xl text-slate-300 mb-3"></i>
+          <p class="text-slate-600 font-medium">Chưa có hạng phòng nào trong danh mục này!</p>
+          <button onclick="window.openRoomTypeModal()" class="mt-4 px-4 py-2 text-xs font-semibold gold-gradient text-white rounded-xl shadow">
+            + Thêm hạng phòng mới ngay
+          </button>
+        </div>
+      `;
+      return;
+    }
+
     container.innerHTML = types.map(room => {
       const availableRoomsCount = roomsData.filter(r => r.typeId === room.id && r.status === 'available').length;
+      const mainImage = (room.images && room.images.length > 0) ? room.images[0] : 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80';
+      const badgeText = room.badge || 'Hạng sang';
+
       return `
-        <div class="room-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col group">
+        <div class="room-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col group relative">
           <div class="relative overflow-hidden h-64">
-            <img src="${room.images[0]}" alt="${room.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <img src="${mainImage}" alt="${room.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             <span class="absolute top-4 left-4 bg-amber-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-md uppercase tracking-wider">
-              ${room.badge}
+              ${badgeText}
             </span>
             <div class="absolute bottom-3 right-3 bg-slate-900/80 backdrop-blur-md text-amber-300 text-xs px-2.5 py-1 rounded-md font-medium">
               <i class="fa-solid fa-door-open mr-1"></i> Còn ${availableRoomsCount} phòng trống
             </div>
+
+            <!-- Quick Edit Action for Admin -->
+            <button onclick="window.openRoomTypeModal('${room.id}')" class="absolute top-4 right-4 bg-slate-900/80 hover:bg-amber-600 text-white px-3 py-1.5 rounded-xl text-xs font-semibold shadow-lg backdrop-blur-md transition-all flex items-center gap-1.5 border border-white/20" title="Nhấp vào đây để sửa thông tin và giá phòng này">
+              <i class="fa-solid fa-pen-to-square text-amber-300"></i> Sửa phòng
+            </button>
           </div>
           
           <div class="p-6 flex-1 flex flex-col justify-between">
@@ -84,8 +210,8 @@
               <div class="border-t border-slate-100 pt-3 mb-4">
                 <span class="text-xs font-medium text-slate-400 block mb-1.5">Tiện nghi tiêu biểu:</span>
                 <div class="flex flex-wrap gap-1.5">
-                  ${room.amenities.slice(0, 3).map(a => `<span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded">${a}</span>`).join('')}
-                  <span class="text-[11px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded font-medium">+${room.amenities.length - 3} tiện ích</span>
+                  ${(room.amenities || []).slice(0, 3).map(a => `<span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded">${a}</span>`).join('')}
+                  ${(room.amenities || []).length > 3 ? `<span class="text-[11px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded font-medium">+${room.amenities.length - 3} tiện ích</span>` : ''}
                 </div>
               </div>
             </div>
@@ -110,18 +236,302 @@
     }).join('');
   }
 
-  // 2. Render Services
+  // Update room options in all select elements across the site
+  function updateRoomTypeSelectOptions() {
+    const searchSelect = document.getElementById('search-type');
+    const bookingSelect = document.getElementById('booking-room-type');
+    const filterContainer = document.getElementById('room-filter-container');
+
+    if (searchSelect) {
+      searchSelect.innerHTML = `<option value="all">Tất cả các hạng phòng</option>` + 
+        roomTypesData.map(r => `<option value="${r.id}">${r.name} (${formatCurrency(r.basePrice)})</option>`).join('');
+    }
+
+    if (bookingSelect) {
+      const currentVal = bookingSelect.value;
+      bookingSelect.innerHTML = roomTypesData.map(r => 
+        `<option value="${r.id}">${r.name} (${formatCurrency(r.basePrice)}/đêm)</option>`
+      ).join('');
+      if (roomTypesData.some(r => r.id === currentVal)) {
+        bookingSelect.value = currentVal;
+      } else if (roomTypesData.length > 0) {
+        bookingSelect.value = roomTypesData[0].id;
+        currentBookingState.roomTypeId = roomTypesData[0].id;
+      }
+    }
+
+    if (filterContainer) {
+      filterContainer.innerHTML = `
+        <button data-type="all" class="room-filter-btn px-4 py-2 rounded-xl text-xs font-semibold gold-gradient text-white shadow-md transition-all">
+          Tất cả
+        </button>
+      ` + roomTypesData.map(r => `
+        <button data-type="${r.id}" class="room-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:border-amber-400 transition-all">
+          ${r.name.split(' ')[0]} ${r.code || ''}
+        </button>
+      `).join('') + `
+        <button onclick="window.openRoomTypeModal()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-300 hover:bg-amber-100 transition-all flex items-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-circle-plus"></i> Thêm phòng mới
+        </button>
+      `;
+
+      // Rebind filter events
+      filterContainer.querySelectorAll('.room-filter-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          filterContainer.querySelectorAll('.room-filter-btn').forEach(b => {
+            b.className = 'room-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:border-amber-400 transition-all';
+          });
+          this.className = 'room-filter-btn px-4 py-2 rounded-xl text-xs font-semibold gold-gradient text-white shadow-md transition-all';
+          const type = this.getAttribute('data-type');
+          renderRooms(type);
+        });
+      });
+    }
+  }
+
+  // 2. Render Admin Room Types Table/Cards
+  function renderAdminRoomTypes() {
+    const container = document.getElementById('admin-room-types-list');
+    if (!container) return;
+
+    if (roomTypesData.length === 0) {
+      container.innerHTML = `
+        <div class="col-span-full py-8 text-center text-slate-400 text-xs">
+          Chưa có hạng phòng nào. Bấm nút "Thêm hạng phòng mới" để bắt đầu!
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = roomTypesData.map(room => {
+      const roomUnitsCount = roomsData.filter(r => r.typeId === room.id).length;
+      const mainImage = (room.images && room.images.length > 0) ? room.images[0] : 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=600&q=80';
+
+      return `
+        <div class="bg-slate-800/90 rounded-2xl border border-slate-700 p-4 flex flex-col justify-between gap-4">
+          <div class="flex gap-4 items-start">
+            <img src="${mainImage}" alt="${room.name}" class="w-24 h-24 rounded-xl object-cover border border-slate-700 shrink-0">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-[10px] font-bold bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded border border-amber-500/30 uppercase">${room.code || 'STD'}</span>
+                <span class="text-[10px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded">${room.badge || 'Hạng sang'}</span>
+                <span class="text-[10px] text-slate-400 ml-auto">${roomUnitsCount} phòng rack</span>
+              </div>
+              <h4 class="font-serif font-bold text-white text-base truncate">${room.name}</h4>
+              <div class="text-xs text-amber-400 font-semibold mt-0.5">${formatCurrency(room.basePrice)} <span class="text-[10px] text-slate-400 font-normal">/đêm</span></div>
+              <div class="text-[11px] text-slate-400 mt-1 flex flex-wrap gap-2">
+                <span><i class="fa-solid fa-arrows-up-down-left-right text-amber-500 mr-1"></i>${room.size}m²</span>
+                <span><i class="fa-solid fa-bed text-amber-500 mr-1"></i>${room.bed}</span>
+                <span><i class="fa-solid fa-eye text-amber-500 mr-1"></i>${room.view}</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-[11px] text-slate-400 line-clamp-2 italic">${room.description}</p>
+
+          <div class="pt-3 border-t border-slate-700 flex justify-end gap-2">
+            <button onclick="window.openRoomTypeModal('${room.id}')" class="px-4 py-2 bg-amber-600 text-white hover:bg-amber-500 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 shadow">
+              <i class="fa-solid fa-pen-to-square"></i> Chỉnh Sửa Phòng Này
+            </button>
+            <button onclick="window.deleteRoomType('${room.id}')" class="px-3 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5">
+              <i class="fa-solid fa-trash-can"></i> Xóa
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // 3. Modal Add / Edit Room Type
+  window.openRoomTypeModal = function (roomTypeId = null) {
+    const modal = document.getElementById('room-type-modal');
+    const titleEl = document.getElementById('room-modal-title');
+    const hiddenId = document.getElementById('form-room-id');
+
+    const inName = document.getElementById('form-room-name');
+    const inCode = document.getElementById('form-room-code');
+    const inPrice = document.getElementById('form-room-price');
+    const inSize = document.getElementById('form-room-size');
+    const inBed = document.getElementById('form-room-bed');
+    const inAdults = document.getElementById('form-room-adults');
+    const inChildren = document.getElementById('form-room-children');
+    const inView = document.getElementById('form-room-view');
+    const inBadge = document.getElementById('form-room-badge');
+    const inImage = document.getElementById('form-room-image');
+    const inAmenities = document.getElementById('form-room-amenities');
+    const inDesc = document.getElementById('form-room-desc');
+
+    if (roomTypeId) {
+      const room = roomTypesData.find(r => r.id === roomTypeId);
+      if (!room) return;
+      titleEl.textContent = `Chỉnh sửa hạng phòng: ${room.name}`;
+      hiddenId.value = room.id;
+
+      inName.value = room.name || '';
+      inCode.value = room.code || '';
+      inPrice.value = room.basePrice || '';
+      inSize.value = room.size || '';
+      inBed.value = room.bed || '';
+      inAdults.value = room.maxAdults || 2;
+      inChildren.value = room.maxChildren || 1;
+      inView.value = room.view || '';
+      inBadge.value = room.badge || '';
+      inImage.value = (room.images && room.images.length > 0) ? room.images[0] : '';
+      inAmenities.value = (room.amenities || []).join(', ');
+      inDesc.value = room.description || '';
+    } else {
+      titleEl.textContent = 'Thêm Hạng Phòng Mới';
+      hiddenId.value = '';
+
+      inName.value = '';
+      inCode.value = 'STD';
+      inPrice.value = '1200000';
+      inSize.value = '35';
+      inBed.value = '1 Giường đôi King Size';
+      inAdults.value = 2;
+      inChildren.value = 1;
+      inView.value = 'Hướng biển trực diện (Ocean View)';
+      inBadge.value = 'Mới ra mắt';
+      inImage.value = 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80';
+      inAmenities.value = 'Wifi tốc độ cao 5G, Smart TV 55 inch, Bồn tắm nằm view biển, Điều hòa 2 chiều, Minibar cao cấp, Áo choàng lụa';
+      inDesc.value = 'Không gian nghỉ dưỡng tiện nghi, sang trọng với tầm nhìn khoáng đạt đón ánh bình minh.';
+    }
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  };
+
+  window.closeRoomTypeModal = function () {
+    const modal = document.getElementById('room-type-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  };
+
+  // Handle Save Room Type (Add or Update)
+  window.handleSaveRoomType = function (e) {
+    e.preventDefault();
+
+    const id = document.getElementById('form-room-id').value.trim();
+    const name = document.getElementById('form-room-name').value.trim();
+    const code = document.getElementById('form-room-code').value.trim().toUpperCase() || 'STD';
+    const basePrice = parseInt(document.getElementById('form-room-price').value) || 1000000;
+    const size = parseInt(document.getElementById('form-room-size').value) || 30;
+    const bed = document.getElementById('form-room-bed').value.trim();
+    const maxAdults = parseInt(document.getElementById('form-room-adults').value) || 2;
+    const maxChildren = parseInt(document.getElementById('form-room-children').value) || 0;
+    const view = document.getElementById('form-room-view').value.trim();
+    const badge = document.getElementById('form-room-badge').value.trim() || 'Hạng sang';
+    const image = document.getElementById('form-room-image').value.trim() || 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80';
+    const amenitiesRaw = document.getElementById('form-room-amenities').value.trim();
+    const amenities = amenitiesRaw ? amenitiesRaw.split(',').map(s => s.trim()).filter(Boolean) : ["Wifi tốc độ cao", "Smart TV", "Điều hòa 2 chiều", "Minibar"];
+    const description = document.getElementById('form-room-desc').value.trim();
+
+    if (!name) {
+      showToast('Vui lòng nhập tên hạng phòng!', 'error');
+      return;
+    }
+
+    if (id) {
+      // Update existing
+      const roomIndex = roomTypesData.findIndex(r => r.id === id);
+      if (roomIndex > -1) {
+        roomTypesData[roomIndex] = {
+          ...roomTypesData[roomIndex],
+          name,
+          code,
+          basePrice,
+          size,
+          bed,
+          maxAdults,
+          maxChildren,
+          view,
+          badge,
+          images: [image, ...roomTypesData[roomIndex].images.slice(1)],
+          amenities,
+          description
+        };
+        showToast(`Đã cập nhật hạng phòng "${name}" thành công!`);
+      }
+    } else {
+      // Add new room type
+      const newId = `rt-${Date.now().toString().slice(-6)}`;
+      const newRoomType = {
+        id: newId,
+        name,
+        code,
+        basePrice,
+        size,
+        bed,
+        maxAdults,
+        maxChildren,
+        view,
+        badge,
+        amenities,
+        images: [image],
+        description
+      };
+      roomTypesData.push(newRoomType);
+
+      // Add a couple of initial room rack units for this new type
+      const newRoomNum1 = `${Math.floor(2 + Math.random() * 2)}0${Math.floor(1 + Math.random() * 8)}`;
+      const newRoomNum2 = `${Math.floor(2 + Math.random() * 2)}1${Math.floor(1 + Math.random() * 8)}`;
+      roomsData.push({ id: `rm-${Date.now()}-1`, roomNumber: newRoomNum1, floor: parseInt(newRoomNum1[0]), typeId: newId, status: 'available' });
+      roomsData.push({ id: `rm-${Date.now()}-2`, roomNumber: newRoomNum2, floor: parseInt(newRoomNum2[0]), typeId: newId, status: 'available' });
+      saveRooms();
+
+      showToast(`Đã thêm mới hạng phòng "${name}" thành công!`);
+    }
+
+    saveRoomTypes();
+    closeRoomTypeModal();
+
+    // Re-render all connected parts
+    renderRooms();
+    renderAdminRoomTypes();
+    updateRoomTypeSelectOptions();
+    renderAdminRack();
+    updateBookingCalculations();
+  };
+
+  // Delete Room Type
+  window.deleteRoomType = function (roomTypeId) {
+    const room = roomTypesData.find(r => r.id === roomTypeId);
+    if (!room) return;
+
+    if (!confirm(`Bạn có chắc chắn muốn xóa hạng phòng "${room.name}" không?`)) return;
+
+    roomTypesData = roomTypesData.filter(r => r.id !== roomTypeId);
+    roomsData = roomsData.filter(r => r.typeId !== roomTypeId);
+
+    saveRoomTypes();
+    saveRooms();
+
+    renderRooms();
+    renderAdminRoomTypes();
+    updateRoomTypeSelectOptions();
+    renderAdminRack();
+    updateBookingCalculations();
+
+    showToast(`Đã xóa hạng phòng "${room.name}"!`);
+  };
+
+  // 4. Render Services (Products)
   function renderServices() {
     const container = document.getElementById('services-container');
     if (!container) return;
 
-    container.innerHTML = window.ANH_DUONG_DATA.services.map(s => `
-      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300 flex flex-col group">
+    container.innerHTML = servicesData.map(s => `
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300 flex flex-col group relative">
         <div class="h-48 overflow-hidden relative">
           <img src="${s.image}" alt="${s.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           <div class="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-amber-600 shadow">
             <i class="fa-solid ${s.icon} text-lg"></i>
           </div>
+
+          <!-- Quick Edit Service Button -->
+          <button onclick="window.openServiceModal('${s.id}')" class="absolute top-3 left-3 bg-slate-900/80 hover:bg-amber-600 text-white px-2.5 py-1 rounded-lg text-xs font-semibold shadow-md backdrop-blur-md transition-all flex items-center gap-1 border border-white/20" title="Sửa dịch vụ này">
+            <i class="fa-solid fa-pen-to-square text-amber-300"></i> Sửa
+          </button>
         </div>
         <div class="p-6 flex-1 flex flex-col justify-between">
           <div>
@@ -143,21 +553,198 @@
     `).join('');
   }
 
-  // 3. Room Detail Modal
+  // 4b. Render Admin Services List
+  function renderAdminServices() {
+    const container = document.getElementById('admin-services-list');
+    if (!container) return;
+
+    if (servicesData.length === 0) {
+      container.innerHTML = `
+        <div class="col-span-full py-8 text-center text-slate-400 text-xs">
+          Chưa có dịch vụ nào. Bấm nút "Thêm Dịch Vụ Mới" để tạo!
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = servicesData.map(s => `
+      <div class="bg-slate-800/90 rounded-2xl border border-slate-700 p-4 flex flex-col justify-between gap-4">
+        <div class="flex gap-4 items-start">
+          <img src="${s.image}" alt="${s.name}" class="w-20 h-20 rounded-xl object-cover border border-slate-700 shrink-0">
+          <div class="flex-1 min-w-0">
+            <h4 class="font-serif font-bold text-white text-base truncate">${s.name}</h4>
+            <div class="text-xs text-amber-400 font-semibold mt-0.5">${formatCurrency(s.price)} <span class="text-[10px] text-slate-400 font-normal">/${s.unit}</span></div>
+            <p class="text-[11px] text-slate-400 line-clamp-2 mt-1">${s.description}</p>
+          </div>
+        </div>
+        <div class="pt-3 border-t border-slate-700 flex justify-end gap-2">
+          <button onclick="window.openServiceModal('${s.id}')" class="px-4 py-2 bg-amber-600 text-white hover:bg-amber-500 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-pen-to-square"></i> Chỉnh Sửa
+          </button>
+          <button onclick="window.deleteService('${s.id}')" class="px-3 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5">
+            <i class="fa-solid fa-trash-can"></i> Xóa
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // 4c. Modal Add / Edit Service
+  window.openServiceModal = function (serviceId = null) {
+    const modal = document.getElementById('service-modal');
+    const titleEl = document.getElementById('service-modal-title');
+    const hiddenId = document.getElementById('form-service-id');
+
+    const inName = document.getElementById('form-service-name');
+    const inPrice = document.getElementById('form-service-price');
+    const inUnit = document.getElementById('form-service-unit');
+    const inIcon = document.getElementById('form-service-icon');
+    const inImage = document.getElementById('form-service-image');
+    const inDesc = document.getElementById('form-service-desc');
+
+    if (serviceId) {
+      const srv = servicesData.find(s => s.id === serviceId);
+      if (!srv) return;
+      titleEl.textContent = `Chỉnh sửa dịch vụ: ${srv.name}`;
+      hiddenId.value = srv.id;
+
+      inName.value = srv.name || '';
+      inPrice.value = srv.price || '';
+      inUnit.value = srv.unit || '';
+      inIcon.value = srv.icon || 'fa-bell-concierge';
+      inImage.value = srv.image || '';
+      inDesc.value = srv.description || '';
+    } else {
+      titleEl.textContent = 'Thêm Gói Dịch Vụ Mới';
+      hiddenId.value = '';
+
+      inName.value = '';
+      inPrice.value = '300000';
+      inUnit.value = 'người';
+      inIcon.value = 'fa-bell-concierge';
+      inImage.value = 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80';
+      inDesc.value = 'Trải nghiệm dịch vụ cao cấp chuẩn 5 sao cùng nhân viên chu đáo.';
+    }
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  };
+
+  window.closeServiceModal = function () {
+    const modal = document.getElementById('service-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  };
+
+  window.handleSaveService = function (e) {
+    e.preventDefault();
+
+    const id = document.getElementById('form-service-id').value.trim();
+    const name = document.getElementById('form-service-name').value.trim();
+    const price = parseInt(document.getElementById('form-service-price').value) || 200000;
+    const unit = document.getElementById('form-service-unit').value.trim() || 'lần';
+    const icon = document.getElementById('form-service-icon').value.trim() || 'fa-bell-concierge';
+    const image = document.getElementById('form-service-image').value.trim() || 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80';
+    const description = document.getElementById('form-service-desc').value.trim();
+
+    if (!name) {
+      showToast('Vui lòng nhập tên dịch vụ!', 'error');
+      return;
+    }
+
+    if (id) {
+      const idx = servicesData.findIndex(s => s.id === id);
+      if (idx > -1) {
+        servicesData[idx] = { ...servicesData[idx], name, price, unit, icon, image, description };
+        showToast(`Đã cập nhật dịch vụ "${name}" thành công!`);
+      }
+    } else {
+      const newId = `srv-${Date.now().toString().slice(-6)}`;
+      servicesData.push({ id: newId, name, price, unit, icon, image, description });
+      showToast(`Đã thêm dịch vụ "${name}" thành công!`);
+    }
+
+    saveServices();
+    closeServiceModal();
+
+    renderServices();
+    renderAdminServices();
+    renderBookingServiceCheckboxes();
+    updateBookingCalculations();
+  };
+
+  window.deleteService = function (serviceId) {
+    const srv = servicesData.find(s => s.id === serviceId);
+    if (!srv) return;
+    if (!confirm(`Bạn có chắc chắn muốn xóa dịch vụ "${srv.name}" không?`)) return;
+
+    servicesData = servicesData.filter(s => s.id !== serviceId);
+    saveServices();
+
+    renderServices();
+    renderAdminServices();
+    renderBookingServiceCheckboxes();
+    updateBookingCalculations();
+
+    showToast(`Đã xóa dịch vụ "${srv.name}"!`);
+  };
+
+  // Admin Tab Navigation
+  window.switchAdminTab = function (tabName) {
+    const tabOverview = document.getElementById('admin-tab-overview');
+    const tabRooms = document.getElementById('admin-tab-rooms');
+    const tabServices = document.getElementById('admin-tab-services');
+    const tabHotel = document.getElementById('admin-tab-hotel');
+
+    const btnOverview = document.getElementById('btn-admin-overview');
+    const btnRooms = document.getElementById('btn-admin-rooms');
+    const btnServices = document.getElementById('btn-admin-services');
+    const btnHotel = document.getElementById('btn-admin-hotel');
+
+    const tabs = [tabOverview, tabRooms, tabServices, tabHotel];
+    const btns = [btnOverview, btnRooms, btnServices, btnHotel];
+
+    tabs.forEach(t => t && t.classList.add('hidden'));
+    btns.forEach(b => {
+      if (b) {
+        b.className = 'px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-all border border-slate-700 flex items-center gap-2';
+      }
+    });
+
+    if (tabName === 'overview') {
+      if (tabOverview) tabOverview.classList.remove('hidden');
+      if (btnOverview) btnOverview.className = 'px-4 py-2.5 rounded-xl text-xs font-semibold gold-gradient text-white shadow-md transition-all flex items-center gap-2';
+    } else if (tabName === 'rooms') {
+      if (tabRooms) tabRooms.classList.remove('hidden');
+      if (btnRooms) btnRooms.className = 'px-4 py-2.5 rounded-xl text-xs font-semibold gold-gradient text-white shadow-md transition-all flex items-center gap-2';
+      renderAdminRoomTypes();
+    } else if (tabName === 'services') {
+      if (tabServices) tabServices.classList.remove('hidden');
+      if (btnServices) btnServices.className = 'px-4 py-2.5 rounded-xl text-xs font-semibold gold-gradient text-white shadow-md transition-all flex items-center gap-2';
+      renderAdminServices();
+    } else if (tabName === 'hotel') {
+      if (tabHotel) tabHotel.classList.remove('hidden');
+      if (btnHotel) btnHotel.className = 'px-4 py-2.5 rounded-xl text-xs font-semibold gold-gradient text-white shadow-md transition-all flex items-center gap-2';
+      renderHotelInfo();
+    }
+  };
+
+  // 5. Room Detail Modal
   window.viewRoomDetail = function (roomId) {
-    const room = window.ANH_DUONG_DATA.roomTypes.find(r => r.id === roomId);
+    const room = roomTypesData.find(r => r.id === roomId);
     if (!room) return;
 
     const modal = document.getElementById('room-detail-modal');
     const content = document.getElementById('room-detail-content');
+    const images = (room.images && room.images.length > 0) ? room.images : ['https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80'];
 
     content.innerHTML = `
       <div class="p-6 sm:p-8">
         <div class="flex justify-between items-start pb-4 border-b border-slate-100">
           <div>
-            <span class="text-xs font-semibold text-amber-600 uppercase tracking-widest">${room.badge}</span>
+            <span class="text-xs font-semibold text-amber-600 uppercase tracking-widest">${room.badge || 'Hạng sang'}</span>
             <h2 class="text-2xl sm:text-3xl font-bold font-serif text-slate-800">${room.name}</h2>
-            <p class="text-slate-500 text-sm mt-1"><i class="fa-solid fa-location-dot text-amber-600 mr-1.5"></i>Khách sạn Ánh Dương Nha Trang • ${room.view}</p>
+            <p class="text-slate-500 text-sm mt-1"><i class="fa-solid fa-location-dot text-amber-600 mr-1.5"></i>${hotelInfo.name} • ${room.view}</p>
           </div>
           <button onclick="window.closeRoomDetail()" class="text-slate-400 hover:text-slate-600 text-2xl w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100">
             &times;
@@ -167,10 +754,10 @@
         <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <div class="rounded-2xl overflow-hidden h-72 shadow-md mb-3">
-              <img id="detail-main-img" src="${room.images[0]}" class="w-full h-full object-cover">
+              <img id="detail-main-img" src="${images[0]}" class="w-full h-full object-cover">
             </div>
             <div class="grid grid-cols-3 gap-2">
-              ${room.images.map((img, idx) => `
+              ${images.map((img, idx) => `
                 <img src="${img}" class="h-20 w-full object-cover rounded-xl cursor-pointer hover:opacity-80 transition-opacity border-2 ${idx === 0 ? 'border-amber-600' : 'border-transparent'}" onclick="document.getElementById('detail-main-img').src='${img}'">
               `).join('')}
             </div>
@@ -190,7 +777,7 @@
 
               <h3 class="font-bold text-slate-800 text-base mb-2">Tiện nghi trọn gói</h3>
               <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600 mb-6">
-                ${room.amenities.map(a => `
+                ${(room.amenities || []).map(a => `
                   <li class="flex items-center"><i class="fa-solid fa-circle-check text-emerald-500 mr-2 text-sm"></i>${a}</li>
                 `).join('')}
               </ul>
@@ -201,9 +788,14 @@
                 <span class="text-xs text-amber-800 font-medium">Giá phòng tiêu chuẩn</span>
                 <div class="text-2xl font-bold text-amber-900">${formatCurrency(room.basePrice)} <span class="text-xs font-normal">/đêm</span></div>
               </div>
-              <button onclick="window.closeRoomDetail(); window.selectRoomForBooking('${room.id}')" class="px-6 py-3 gold-gradient text-white font-semibold text-sm rounded-xl shadow hover:opacity-95 transition-all">
-                Đặt phòng này
-              </button>
+              <div class="flex gap-2">
+                <button onclick="window.closeRoomDetail(); window.openRoomTypeModal('${room.id}')" class="px-4 py-3 bg-slate-900 text-amber-300 font-semibold text-xs rounded-xl shadow hover:bg-slate-800 transition-all">
+                  <i class="fa-solid fa-pen-to-square mr-1"></i> Sửa phòng
+                </button>
+                <button onclick="window.closeRoomDetail(); window.selectRoomForBooking('${room.id}')" class="px-6 py-3 gold-gradient text-white font-semibold text-sm rounded-xl shadow hover:opacity-95 transition-all">
+                  Đặt phòng này
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -220,9 +812,9 @@
     modal.classList.remove('flex');
   };
 
-  // 4. Booking Logic
+  // 6. Booking Logic
   let currentBookingState = {
-    roomTypeId: 'rt-std',
+    roomTypeId: roomTypesData[0] ? roomTypesData[0].id : 'rt-std',
     checkIn: new Date().toISOString().split('T')[0],
     checkOut: new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0], // 2 nights
     adults: 2,
@@ -238,12 +830,12 @@
     let diffDays = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
     if (isNaN(diffDays) || diffDays < 1) diffDays = 1;
 
-    const roomType = window.ANH_DUONG_DATA.roomTypes.find(r => r.id === currentBookingState.roomTypeId) || window.ANH_DUONG_DATA.roomTypes[0];
+    const roomType = roomTypesData.find(r => r.id === currentBookingState.roomTypeId) || roomTypesData[0] || { name: 'Chưa có phòng', basePrice: 0 };
     const roomTotal = roomType.basePrice * diffDays;
 
     let servicesTotal = 0;
     currentBookingState.services.forEach(srvId => {
-      const srv = window.ANH_DUONG_DATA.services.find(s => s.id === srvId);
+      const srv = servicesData.find(s => s.id === srvId);
       if (srv) servicesTotal += srv.price;
     });
 
@@ -330,7 +922,7 @@
     const container = document.getElementById('booking-services-checkboxes');
     if (!container) return;
 
-    container.innerHTML = window.ANH_DUONG_DATA.services.map(s => {
+    container.innerHTML = servicesData.map(s => {
       const isChecked = currentBookingState.services.includes(s.id);
       return `
         <label class="flex items-center justify-between p-3 rounded-xl border ${isChecked ? 'border-amber-500 bg-amber-50/50' : 'border-slate-200 bg-white'} cursor-pointer hover:border-amber-400 transition-all text-xs">
@@ -454,14 +1046,14 @@
     renderAdminBookings();
   };
 
-  // 5. Invoice Modal
+  // 7. Invoice Modal
   window.showInvoiceModal = function (booking) {
     const modal = document.getElementById('invoice-modal');
     const container = document.getElementById('invoice-print-area');
-    const roomType = window.ANH_DUONG_DATA.roomTypes.find(r => r.id === booking.roomTypeId) || {};
+    const roomType = roomTypesData.find(r => r.id === booking.roomTypeId) || {};
 
     const serviceNames = (booking.services || []).map(sId => {
-      const s = window.ANH_DUONG_DATA.services.find(srv => srv.id === sId);
+      const s = servicesData.find(srv => srv.id === sId);
       return s ? s.name : sId;
     }).join(', ') || 'Không chọn';
 
@@ -470,10 +1062,10 @@
         <div>
           <div class="flex items-center gap-2 mb-1">
             <i class="fa-solid fa-crown text-amber-600 text-xl"></i>
-            <h2 class="text-2xl font-bold font-serif text-slate-800 tracking-wide">KHÁCH SẠN ÁNH DƯƠNG</h2>
+            <h2 class="text-2xl font-bold font-serif text-slate-800 tracking-wide uppercase">${hotelInfo.name}</h2>
           </div>
-          <p class="text-xs text-slate-500">88 Trần Phú, Lộc Thọ, TP. Nha Trang, Khánh Hòa</p>
-          <p class="text-xs text-slate-500">Hotline: 1900 888 666 • Email: reservation@khachsananhduong.vn</p>
+          <p class="text-xs text-slate-500">${hotelInfo.address}</p>
+          <p class="text-xs text-slate-500">Hotline: ${hotelInfo.hotline} • Email: ${hotelInfo.bookingEmail || hotelInfo.email}</p>
         </div>
         <div class="text-right">
           <span class="inline-block bg-amber-100 text-amber-900 text-xs font-bold px-3 py-1 rounded-full mb-1">XÁC NHẬN ĐẶT PHÒNG</span>
@@ -544,11 +1136,11 @@
 
       <div class="border-t border-dashed border-slate-200 pt-4 text-[11px] text-slate-500 flex justify-between items-center">
         <div>
-          <p><i class="fa-solid fa-clock mr-1 text-amber-600"></i>Nhận phòng: 14:00 • Trả phòng: 12:00</p>
-          <p>Xuất trình CMND/CCCD hoặc Hộ chiếu khi nhận phòng tại quầy Lễ tân Ánh Dương.</p>
+          <p><i class="fa-solid fa-clock mr-1 text-amber-600"></i>Nhận phòng: ${hotelInfo.checkInTime || '14:00'} • Trả phòng: ${hotelInfo.checkOutTime || '12:00'}</p>
+          <p>Xuất trình CMND/CCCD hoặc Hộ chiếu khi nhận phòng tại quầy Lễ tân.</p>
         </div>
         <div class="text-right font-serif italic text-amber-700">
-          Cảm ơn quý khách đã tin chọn Ánh Dương!
+          Cảm ơn quý khách đã tin chọn ${hotelInfo.name}!
         </div>
       </div>
     `;
@@ -563,7 +1155,7 @@
     modal.classList.remove('flex');
   };
 
-  // 6. Booking Lookup
+  // 8. Booking Lookup
   window.searchMyBookings = function () {
     const query = document.getElementById('lookup-input').value.trim().toLowerCase();
     const resultContainer = document.getElementById('lookup-results');
@@ -590,7 +1182,7 @@
     }
 
     resultContainer.innerHTML = matched.map(b => {
-      const roomType = window.ANH_DUONG_DATA.roomTypes.find(r => r.id === b.roomTypeId) || {};
+      const roomType = roomTypesData.find(r => r.id === b.roomTypeId) || {};
       const statusBadge = {
         'confirmed': '<span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold">Đã xác nhận</span>',
         'checked_in': '<span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-semibold">Đang ở</span>',
@@ -670,13 +1262,13 @@
     }
   };
 
-  // 7. Admin Dashboard
+  // 9. Admin Dashboard
   function renderAdminRack() {
     const rackGrid = document.getElementById('admin-rack-grid');
     if (!rackGrid) return;
 
     rackGrid.innerHTML = roomsData.map(r => {
-      const type = window.ANH_DUONG_DATA.roomTypes.find(t => t.id === r.typeId) || {};
+      const type = roomTypesData.find(t => t.id === r.typeId) || {};
       let badgeClass = 'rack-badge-available';
       let statusText = 'Phòng trống';
       if (r.status === 'occupied') {
@@ -706,7 +1298,7 @@
     const totalBookings = bookingsData.length;
     const totalRevenue = bookingsData.filter(b => b.bookingStatus !== 'cancelled').reduce((acc, b) => acc + (b.finalTotal || 0), 0);
     const occupiedCount = roomsData.filter(r => r.status === 'occupied' || r.status === 'reserved').length;
-    const occupancyRate = Math.round((occupiedCount / roomsData.length) * 100);
+    const occupancyRate = roomsData.length > 0 ? Math.round((occupiedCount / roomsData.length) * 100) : 0;
     const availableCount = roomsData.filter(r => r.status === 'available').length;
 
     const elStatRevenue = document.getElementById('admin-stat-revenue');
@@ -715,7 +1307,7 @@
     const elStatAvailable = document.getElementById('admin-stat-available');
 
     if (elStatRevenue) elStatRevenue.textContent = formatCurrency(totalRevenue);
-    if (elStatBookings) elStatBookings.textContent = totalBookings;
+    if (elStatBookings) elStatBookings.textContent = `${totalBookings} đơn`;
     if (elStatOccupancy) elStatOccupancy.textContent = `${occupancyRate}%`;
     if (elStatAvailable) elStatAvailable.textContent = `${availableCount}/${roomsData.length}`;
   }
@@ -744,7 +1336,7 @@
     if (!tbody) return;
 
     tbody.innerHTML = bookingsData.map(b => {
-      const roomType = window.ANH_DUONG_DATA.roomTypes.find(r => r.id === b.roomTypeId) || {};
+      const roomType = roomTypesData.find(r => r.id === b.roomTypeId) || {};
       return `
         <tr class="hover:bg-slate-50 border-b border-slate-100 text-xs">
           <td class="p-3 font-bold text-amber-700">${b.bookingCode}</td>
@@ -876,18 +1468,6 @@
       });
     }
 
-    // Filter Buttons
-    document.querySelectorAll('.room-filter-btn').forEach(btn => {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('.room-filter-btn').forEach(b => {
-          b.className = 'room-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:border-amber-400 transition-all';
-        });
-        this.className = 'room-filter-btn px-4 py-2 rounded-xl text-xs font-semibold gold-gradient text-white shadow-md transition-all';
-        const type = this.getAttribute('data-type');
-        renderRooms(type);
-      });
-    });
-
     // Mobile menu toggle
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -898,11 +1478,15 @@
     }
 
     // Initial renders
+    renderHotelInfo();
+    updateRoomTypeSelectOptions();
     renderRooms();
     renderServices();
     renderBookingServiceCheckboxes();
     updateBookingCalculations();
     renderAdminRack();
     renderAdminBookings();
+    renderAdminRoomTypes();
+    renderAdminServices();
   });
 })();

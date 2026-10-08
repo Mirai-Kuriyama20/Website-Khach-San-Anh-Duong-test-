@@ -1,5 +1,9 @@
-// Dữ liệu ban đầu cho Khách Sạn Ánh Dương (Ánh Dương Luxury Hotel & Resort Nha Trang)
-window.ANH_DUONG_DATA = {
+/**
+ * DỮ LIỆU GỐC HỆ THỐNG KHÁCH SẠN ÁNH DƯƠNG LUXURY 5 SAO
+ * Hỗ trợ đồng thời Browser (window.ANH_DUONG_DATA) và Node.js CommonJS (module.exports)
+ */
+
+const DATA_CORE = {
   hotelInfo: {
     name: "Khách Sạn Ánh Dương",
     brand: "Ánh Dương Luxury Hotel & Resort",
@@ -20,8 +24,8 @@ window.ANH_DUONG_DATA = {
   roomTypes: [
     {
       id: "rt-std",
-      name: "Standard City View",
       code: "STD",
+      name: "Standard City View",
       basePrice: 850000,
       description: "Phòng Tiêu chuẩn hướng nhìn toàn cảnh thành phố Nha Trang lung linh về đêm, trang bị đầy đủ tiện nghi hiện đại thích hợp cho các chuyến công tác hoặc kỳ nghỉ ngắn ngày.",
       size: 28,
@@ -46,8 +50,8 @@ window.ANH_DUONG_DATA = {
     },
     {
       id: "rt-dlx",
-      name: "Deluxe Ocean View",
       code: "DLX",
+      name: "Deluxe Ocean View",
       basePrice: 1450000,
       description: "Phòng Deluxe cao cấp với ban công riêng rộng rãi hướng thẳng ra biển xanh ngát, nội thất gỗ sồi ấm áp và bồn tắm nằm ngắm trọn vẹn bình minh vịnh Nha Trang.",
       size: 38,
@@ -73,8 +77,8 @@ window.ANH_DUONG_DATA = {
     },
     {
       id: "rt-ste",
-      name: "Premier Executive Suite",
       code: "STE",
+      name: "Premier Executive Suite",
       basePrice: 2650000,
       description: "Căn hộ Suite thượng hạng gồm phòng khách riêng biệt sang trọng, quầy bar mini, phòng ngủ lộng lẫy cùng đặc quyền thưởng thức trà chiều tại Executive Lounge tầng 20.",
       size: 65,
@@ -101,8 +105,8 @@ window.ANH_DUONG_DATA = {
     },
     {
       id: "rt-fam",
-      name: "Family Ocean Grand Villa",
       code: "FAM",
+      name: "Family Ocean Grand Villa",
       basePrice: 3800000,
       description: "Villa biệt lập không gian lớn 2 phòng ngủ kết nối, sân vườn nhỏ hướng biển, bếp tiện nghi và khu vực bàn ăn gia đình ấm cúng cho cả gia đình đông người.",
       size: 95,
@@ -128,8 +132,8 @@ window.ANH_DUONG_DATA = {
     },
     {
       id: "rt-pen",
-      name: "Ánh Dương Royal Presidential Penthouse",
       code: "PEN",
+      name: "Ánh Dương Royal Presidential Penthouse",
       basePrice: 7500000,
       description: "Căn Penthouse độc bản tại tầng thượng cao nhất của khách sạn Ánh Dương, bể bơi vô cực kính tràn viền riêng biệt ngắm trọn bình minh và hoàng hôn biển tuyệt mỹ.",
       size: 180,
@@ -156,27 +160,23 @@ window.ANH_DUONG_DATA = {
   ],
 
   rooms: [
-    // Tầng 1
     { id: "rm-101", roomNumber: "101", floor: 1, typeId: "rt-std", status: "available" },
     { id: "rm-102", roomNumber: "102", floor: 1, typeId: "rt-std", status: "available" },
     { id: "rm-103", roomNumber: "103", floor: 1, typeId: "rt-std", status: "occupied", guest: "Trần Hoàng Long" },
     { id: "rm-104", roomNumber: "104", floor: 1, typeId: "rt-dlx", status: "available" },
     { id: "rm-105", roomNumber: "105", floor: 1, typeId: "rt-dlx", status: "available" },
 
-    // Tầng 2
     { id: "rm-201", roomNumber: "201", floor: 2, typeId: "rt-dlx", status: "available" },
     { id: "rm-202", roomNumber: "202", floor: 2, typeId: "rt-dlx", status: "reserved", guest: "Lê Minh Tuấn" },
     { id: "rm-203", roomNumber: "203", floor: 2, typeId: "rt-dlx", status: "available" },
     { id: "rm-204", roomNumber: "204", floor: 2, typeId: "rt-ste", status: "available" },
     { id: "rm-205", roomNumber: "205", floor: 2, typeId: "rt-ste", status: "occupied", guest: "Phạm Minh Trang" },
 
-    // Tầng 3
     { id: "rm-301", roomNumber: "301", floor: 3, typeId: "rt-ste", status: "available" },
     { id: "rm-302", roomNumber: "302", floor: 3, typeId: "rt-ste", status: "available" },
     { id: "rm-303", roomNumber: "303", floor: 3, typeId: "rt-fam", status: "available" },
     { id: "rm-304", roomNumber: "304", floor: 3, typeId: "rt-fam", status: "maintenance", guest: "Bảo trì định kỳ" },
 
-    // Tầng 4
     { id: "rm-401", roomNumber: "401", floor: 4, typeId: "rt-fam", status: "available" },
     { id: "rm-402", roomNumber: "402", floor: 4, typeId: "rt-pen", status: "available" }
   ],
@@ -237,6 +237,12 @@ window.ANH_DUONG_DATA = {
       description: "Giảm 10% tổng đơn cho khách đặt phòng trực tuyến"
     },
     {
+      code: "ANHDUONG10",
+      discountType: "percent",
+      discountValue: 10,
+      description: "Voucher giảm ngay 10% tổng tiền phòng"
+    },
+    {
       code: "VIP2026",
       discountType: "percent",
       discountValue: 15,
@@ -270,8 +276,8 @@ window.ANH_DUONG_DATA = {
       discountAmount: 214000,
       finalTotal: 1926000,
       depositAmount: 577800,
-      paymentStatus: "paid_deposit", // paid_deposit, paid_full, pending
-      bookingStatus: "checked_in", // confirmed, checked_in, checked_out, cancelled
+      paymentStatus: "paid_deposit",
+      bookingStatus: "checked_in",
       createdAt: "2026-10-05T14:20:00.000Z",
       notes: "Cần phòng tầng yên tĩnh, không hút thuốc"
     },
@@ -328,6 +334,7 @@ window.ANH_DUONG_DATA = {
   users: [
     {
       id: "usr-admin-1",
+      username: "admin",
       email: "admin@anhduonghotel.vn",
       password: "admin",
       fullName: "Thẩm Anh Minh",
@@ -339,6 +346,7 @@ window.ANH_DUONG_DATA = {
     },
     {
       id: "usr-recep-1",
+      username: "letan",
       email: "reception@anhduonghotel.vn",
       password: "reception",
       fullName: "Nguyễn Ngọc Anh",
@@ -350,6 +358,7 @@ window.ANH_DUONG_DATA = {
     },
     {
       id: "usr-guest-1",
+      username: "khachhang",
       email: "khachhang@gmail.com",
       password: "khach",
       fullName: "Trần Hoàng Long",
@@ -361,3 +370,39 @@ window.ANH_DUONG_DATA = {
     }
   ]
 };
+
+// Chuẩn bị mảng tương thích cho Node.js Test Suite & Server
+const INITIAL_ROOM_TYPES = DATA_CORE.roomTypes.map(rt => ({
+  ...rt,
+  id: rt.code // STD, DLX, STE, FAM, PEN để test_suite.js tìm theo id: 'STD'
+})).concat(DATA_CORE.roomTypes); // Giữ cả rt-std
+
+const INITIAL_HOTEL_INFO = DATA_CORE.hotelInfo;
+const INITIAL_ROOMS = DATA_CORE.rooms;
+const INITIAL_SERVICES = DATA_CORE.services;
+const INITIAL_VOUCHERS = DATA_CORE.coupons;
+const INITIAL_USERS = DATA_CORE.users;
+const INITIAL_BOOKINGS = DATA_CORE.initialBookings;
+const INITIAL_REVIEWS = [
+  { id: "rev-1", customerName: "Trần Hoàng Long", rating: 5, comment: "Kỳ nghỉ tuyệt vời, vịnh biển ngắm hoàng hôn rất đẹp!", roomType: "Standard City View", date: "2026-10-06" }
+];
+
+// Browser attach
+if (typeof window !== 'undefined') {
+  window.ANH_DUONG_DATA = DATA_CORE;
+}
+
+// Node.js CommonJS export
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    ANH_DUONG_DATA: DATA_CORE,
+    INITIAL_HOTEL_INFO,
+    INITIAL_ROOM_TYPES,
+    INITIAL_ROOMS,
+    INITIAL_SERVICES,
+    INITIAL_VOUCHERS,
+    INITIAL_USERS,
+    INITIAL_BOOKINGS,
+    INITIAL_REVIEWS
+  };
+}

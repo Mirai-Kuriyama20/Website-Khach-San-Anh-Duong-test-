@@ -1,0 +1,22 @@
+{
+  "rooms": [
+    {
+      "id": "P101",
+      "roomNumber": "101",
+      "status": "available",
+      "lockedUntil": null,
+      "lockedBySession": null,
+      "lockedCheckIn": null,
+      "lockedCheckOut": null
+    },
+    {
+      "id": "P102",
+      "roomNumber": "102",
+      "status": "available",
+      "lockedUntil": null,
+      "lockedBySession": null,
+      "lockedCheckIn": null,
+      "lockedCheckOut": null
+    }
+  ]
+}

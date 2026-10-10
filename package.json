@@ -4,7 +4,8 @@
   "description": "Website Dat Phong Khach San Anh Duong - SD21301 SOF3033",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "node backend/server.js",
+    "backend": "node backend/server.js",
     "test": "node test/test_suite.js"
   },
   "dependencies": {

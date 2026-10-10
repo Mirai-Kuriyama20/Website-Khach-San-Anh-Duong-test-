@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khách Sạn Ánh Dương - Đẳng Cấp 5 Sao Quốc Tế Bên Vịnh Biển Nha Trang</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23c59d5f'/><path d='M50 15 L58 38 L82 38 L63 53 L70 76 L50 61 L30 76 L37 53 L18 38 L42 38 Z' fill='%23ffffff'/></svg>" />
+  
+  <!-- Google Fonts: Montserrat & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              50: '#fdfbf7',
+              100: '#fbf7ee',
+              200: '#f5ebd5',
+              300: '#eedfbc',
+              400: '#dfba7e',
+              500: '#c59d5f',
+              600: '#9e7538',
+              700: '#7e5a2b',
+              800: '#5e4120',
+              900: '#3f2a15',
+            },
+            navy: {
+              800: '#152238',
+              900: '#09131f',
+              950: '#050b13',
+            }
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-500 selection:text-white">
+
+  <!-- TOP BAR -->
+  <div class="bg-slate-950 text-slate-300 text-xs py-2 px-4 sm:px-8 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center gap-3 sm:gap-6 text-slate-400 text-[11px] sm:text-xs">
+        <span class="flex items-center gap-1.5">
+          <i class="fa-solid fa-location-dot text-amber-400"></i>
+          <span class="hotel-address-text truncate max-w-[180px] sm:max-w-xs md:max-w-none">88 Trần Phú, TP. Nha Trang</span>
+        </span>
+        <span class="hidden md:inline text-slate-700">|</span>
+        <span class="hidden md:flex items-center gap-1.5">
+          <i class="fa-solid fa-envelope text-amber-400"></i>
+          <span class="hotel-email-text">reservation@khachsananhduong.vn</span>
+        </span>
+      </div>
+      <div class="flex items-center gap-3 sm:gap-4 text-[11px] sm:text-xs">
+        <!-- Tester Quick Role Switcher -->
+        <div class="relative inline-block text-left" id="role-switcher-container">
+          <button onclick="window.toggleRoleDropdown()" class="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/40 px-2.5 py-1 rounded-md text-[11px] font-semibold transition">
+            <i class="fa-solid fa-user-shield text-amber-400"></i>
+            <span id="current-role-badge">Tester: Khách hàng</span>
+            <i class="fa-solid fa-chevron-down text-[9px] ml-1"></i>
+          </button>
+          
+          <div id="role-dropdown" class="hidden absolute right-0 mt-1 w-56 bg-slate-800 border border-slate-700 rounded-xl shadow-2xl py-1.5 z-50 text-slate-200">
+            <div class="px-3 py-1 text-[10px] font-bold text-amber-400 uppercase tracking-wider border-b border-slate-700">
+              Chọn vai trò kiểm thử
+            </div>
+            <button onclick="window.quickSwitchRole('customer')" class="w-full text-left px-3 py-2 text-xs hover:bg-slate-700 flex items-center justify-between text-slate-200">
+              <span>👤 Khách hàng (Trần Hoàng Long)</span>
+            </button>
+            <button onclick="window.quickSwitchRole('receptionist')" class="w-full text-left px-3 py-2 text-xs hover:bg-slate-700 flex items-center justify-between text-amber-300">
+              <span>🏨 Lễ tân (Nguyễn Ngọc Anh)</span>
+            </button>
+            <button onclick="window.quickSwitchRole('admin')" class="w-full text-left px-3 py-2 text-xs hover:bg-slate-700 flex items-center justify-between text-purple-300">
+              <span>⚡ Quản trị viên (Thẩm Anh Minh)</span>
+            </button>
+          </div>
+        </div>
+
+        <span class="text-slate-700">|</span>
+
+        <a href="tel:1900888666" class="hover:text-amber-300 transition-colors font-semibold text-amber-400 flex items-center gap-1.5 whitespace-nowrap">
+          <i class="fa-solid fa-phone-volume"></i>
+          <span>Hotline: <strong class="hotel-hotline-text">1900 888 666</strong></span>
+        </a>
+        <span class="text-slate-700">|</span>
+        <a href="#admin-portal" class="text-slate-200 hover:text-amber-300 transition-colors flex items-center gap-1 bg-slate-800/90 hover:bg-slate-800 px-2.5 py-1 rounded-md border border-slate-700 whitespace-nowrap">
+          <i class="fa-solid fa-shield-halved text-amber-400"></i>
+          <span>Quản trị</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAVIGATION -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+      <!-- Brand Logo -->
+      <a href="#trang-chu" onclick="window.navigateToPage('trang-chu'); return false;" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 rounded-2xl gold-gradient flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-crown text-2xl"></i>
+        </div>
+        <div>
+          <span class="font-serif text-2xl font-bold tracking-tight text-slate-900 block leading-tight hotel-name-text">ÁNH DƯƠNG</span>
+          <span class="text-[10px] tracking-[0.25em] text-amber-700 font-semibold uppercase block hotel-brand-text">Luxury Hotel & Resort</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Items -->
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-700">
+        <a href="#trang-chu" onclick="window.navigateToPage('trang-chu'); return false;" class="nav-link-item hover:text-amber-700 transition-colors cursor-pointer" data-page="trang-chu">Trang chủ</a>
+        <a href="#phong-nghi" onclick="window.navigateToPage('phong-nghi'); return false;" class="nav-link-item hover:text-amber-700 transition-colors cursor-pointer" data-page="phong-nghi">Phòng nghỉ</a>
+        <a href="#dich-vu" onclick="window.navigateToPage('dich-vu'); return false;" class="nav-link-item hover:text-amber-700 transition-colors cursor-pointer" data-page="dich-vu">Dịch vụ VIP</a>
+        <a href="#tra-cuu" onclick="window.navigateToPage('tra-cuu'); return false;" class="nav-link-item hover:text-amber-700 transition-colors cursor-pointer" data-page="tra-cuu">Tra cứu đơn</a>
+        <a href="#gioi-thieu" onclick="window.navigateToPage('gioi-thieu'); return false;" class="nav-link-item hover:text-amber-700 transition-colors cursor-pointer" data-page="gioi-thieu">Giới thiệu & Liên hệ</a>
+        <a href="#admin-portal" onclick="window.navigateToPage('admin-portal'); return false;" class="nav-link-item text-amber-700 hover:text-amber-800 font-semibold transition-colors flex items-center gap-1.5 bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-200 cursor-pointer" data-page="admin-portal">
+          <i class="fa-solid fa-sliders"></i> Quản trị
+        </a>
+      </nav>
+
+      <!-- Action & Auth Area -->
+      <div class="hidden sm:flex items-center gap-3">
+        <!-- Auth Container (Switches between Login Button & User Menu) -->
+        <div id="auth-nav-container">
+          <button onclick="window.openAuthModal('login')" class="px-3.5 py-2 rounded-xl border border-slate-200 hover:border-amber-400 hover:bg-amber-50/50 text-slate-700 hover:text-amber-700 text-xs font-semibold flex items-center gap-1.5 transition-all">
+            <i class="fa-regular fa-circle-user text-amber-600 text-sm"></i>
+            <span>Đăng Nhập / Đăng Ký</span>
+          </button>
+        </div>
+
+        <a href="#dat-phong" onclick="window.navigateToPage('dat-phong'); return false;" class="px-5 py-2.5 rounded-xl gold-gradient text-white font-semibold text-xs uppercase tracking-wider shadow-md hover:opacity-95 transition-all flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Đặt phòng ngay</span>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-btn" class="lg:hidden text-slate-700 text-xl p-2 rounded-lg hover:bg-slate-100">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu dropdown -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-4 flex flex-col gap-3 text-sm">
+      <a href="#trang-chu" onclick="window.navigateToPage('trang-chu'); return false;" class="py-2 hover:text-amber-700 font-medium cursor-pointer">Trang chủ</a>
+      <a href="#phong-nghi" onclick="window.navigateToPage('phong-nghi'); return false;" class="py-2 hover:text-amber-700 font-medium cursor-pointer">Phòng nghỉ</a>
+      <a href="#dich-vu" onclick="window.navigateToPage('dich-vu'); return false;" class="py-2 hover:text-amber-700 font-medium cursor-pointer">Dịch vụ VIP</a>
+      <a href="#dat-phong" onclick="window.navigateToPage('dat-phong'); return false;" class="py-2 text-amber-700 font-bold cursor-pointer">Đặt phòng trực tuyến</a>
+      <a href="#tra-cuu" onclick="window.navigateToPage('tra-cuu'); return false;" class="py-2 hover:text-amber-700 font-medium cursor-pointer">Tra cứu đơn đã đặt</a>
+      <a href="#gioi-thieu" onclick="window.navigateToPage('gioi-thieu'); return false;" class="py-2 hover:text-amber-700 font-medium cursor-pointer">Giới thiệu & Liên hệ</a>
+      <a href="#admin-portal" onclick="window.navigateToPage('admin-portal'); return false;" class="py-2 text-amber-700 font-semibold cursor-pointer">Khu vực quản trị khách sạn</a>
+      <div class="pt-2 border-t border-slate-100 flex gap-2">
+        <button onclick="window.openAuthModal('login')" class="flex-1 py-2.5 bg-slate-100 text-slate-800 font-semibold text-xs rounded-xl text-center">
+          <i class="fa-regular fa-user mr-1 text-amber-600"></i> Đăng nhập / Đăng ký
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE VIEW: TRANG CHỦ -->
+  <div id="view-trang-chu" class="page-view animate-fade-in">
+  <!-- HERO SECTION -->
+  <section class="hero-bg min-h-[620px] flex items-center justify-center text-white relative px-4 sm:px-8 py-20">
+    <div class="max-w-4xl mx-auto text-center animate-fade-in">
+      <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-amber-300 text-xs font-semibold uppercase tracking-widest mb-6">
+        <i class="fa-solid fa-star text-amber-400"></i>
+        <i class="fa-solid fa-star text-amber-400"></i>
+        <i class="fa-solid fa-star text-amber-400"></i>
+        <i class="fa-solid fa-star text-amber-400"></i>
+        <i class="fa-solid fa-star text-amber-400"></i>
+        <span class="ml-2 text-white">Đẳng Cấp Nghỉ Dưỡng 5 Sao Quốc Tế</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl font-bold font-serif tracking-tight leading-tight mb-6">
+        <span class="hotel-name-text">Khách Sạn Ánh Dương</span><br>
+        <span class="gold-text-gradient">Tuyệt Tác Bên Vịnh Nha Trang</span>
+      </h1>
+
+      <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-light leading-relaxed mb-10 hotel-desc-text">
+        Khám phá không gian nghỉ dưỡng đỉnh cao với các phòng nghỉ hướng biển trực diện, hồ bơi vô cực chân mây, ẩm thực tinh hoa Á - Âu và dịch vụ quản gia 24/7.
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#dat-phong" onclick="window.navigateToPage('dat-phong'); return false;" class="px-8 py-3.5 gold-gradient rounded-xl font-semibold text-white shadow-xl hover:scale-105 transition-transform text-sm sm:text-base">
+          Trải nghiệm đặt phòng ngay
+        </a>
+        <a href="#phong-nghi" onclick="window.navigateToPage('phong-nghi'); return false;" class="px-8 py-3.5 bg-white/15 backdrop-blur-md hover:bg-white/25 border border-white/30 rounded-xl font-semibold text-white transition-all text-sm sm:text-base">
+          Xem danh sách phòng
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK SEARCH BAR -->
+  <div class="max-w-6xl mx-auto px-4 -mt-12 relative z-30">
+    <form onsubmit="window.handleQuickSearch(event)" class="bg-white rounded-3xl p-5 sm:p-6 shadow-2xl border border-slate-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+      <div>
+        <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-calendar-day text-amber-600 mr-1.5"></i>Ngày nhận phòng
+        </label>
+        <input type="date" id="search-checkin" class="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-amber-500" required>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-calendar-check text-amber-600 mr-1.5"></i>Ngày trả phòng
+        </label>
+        <input type="date" id="search-checkout" class="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-amber-500" required>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-bed text-amber-600 mr-1.5"></i>Hạng phòng
+        </label>
+        <select id="search-type" class="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <!-- Dynamically populated -->
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-user-group text-amber-600 mr-1.5"></i>Số lượng khách
+        </label>
+        <select id="search-guests" class="w-full text-xs font-medium bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <option value="1">1 Người lớn</option>
+          <option value="2" selected>2 Người lớn</option>
+          <option value="3">3 Người lớn</option>
+          <option value="4">4 Người lớn trở lên</option>
+        </select>
+      </div>
+
+      <div>
+        <button type="submit" class="w-full p-3.5 gold-gradient text-white rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2">
+          <i class="fa-solid fa-magnifying-glass"></i> Tìm phòng trống
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- HIGHLIGHTS / 5-STAR AMENITIES -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-8 py-20">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Đặc Quyền Thượng Hạng</span>
+      <h2 class="text-3xl sm:text-4xl font-bold font-serif text-slate-900 mt-2 mb-4">Trải Nghiệm Nghỉ Dưỡng Hoàn Mỹ</h2>
+      <p class="text-slate-500 text-sm">Từng chi tiết tại <span class="hotel-name-text">Khách Sạn Ánh Dương</span> được kiến tạo để mang lại kỳ nghỉ trọn vẹn và đẳng cấp nhất cho quý khách.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4">
+          <i class="fa-solid fa-water-ladder"></i>
+        </div>
+        <h3 class="font-serif font-bold text-lg text-slate-800 mb-2">Hồ Bơi Vô Cực</h3>
+        <p class="text-slate-500 text-xs leading-relaxed">Hồ bơi chân mây tại tầng 21 với góc nhìn panorama toàn vịnh biển Nha Trang thơ mộng.</p>
+      </div>
+
+      <div class="p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+        <h3 class="font-serif font-bold text-lg text-slate-800 mb-2">Ẩm Thực Á - Âu</h3>
+        <p class="text-slate-500 text-xs leading-relaxed">Chuỗi nhà hàng cao cấp phục vụ hải sản tươi sống và buffet sáng với hơn 80 món chọn lọc.</p>
+      </div>
+
+      <div class="p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4">
+          <i class="fa-solid fa-spa"></i>
+        </div>
+        <h3 class="font-serif font-bold text-lg text-slate-800 mb-2">Lotus Spa & Sauna</h3>
+        <p class="text-slate-500 text-xs leading-relaxed">Liệu pháp massage đá núi lửa cổ truyền và phòng xông hơi thảo dược thư giãn tuyệt đối.</p>
+      </div>
+
+      <div class="p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4">
+          <i class="fa-solid fa-bell-concierge"></i>
+        </div>
+        <h3 class="font-serif font-bold text-lg text-slate-800 mb-2">Dịch Vụ Quản Gia 24/7</h3>
+        <p class="text-slate-500 text-xs leading-relaxed">Đội ngũ phục vụ chuyên nghiệp tận tâm, hỗ trợ check-in riêng và phục vụ tour du lịch độc quyền.</p>
+      </div>
+    </div>
+  </section>
+
+  
+  </div><!-- END view-trang-chu -->
+
+  <!-- PAGE VIEW: PHÒNG NGHỈ -->
+  <div id="view-phong-nghi" class="page-view hidden">
+  <!-- ROOMS SECTION -->
+  <section id="phong-nghi" class="bg-slate-100/60 py-20 px-4 sm:px-8 border-y border-slate-200/60">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-600"><a href="#trang-chu" onclick="window.navigateToPage('trang-chu'); return false;" class="hover:underline text-slate-500">Trang chủ</a> / Bộ Sưu Tập Không Gian</span>
+          <h2 class="text-3xl sm:text-4xl font-bold font-serif text-slate-900 mt-2">Hạng Phòng & Biệt Thự Nghỉ Dưỡng</h2>
+          <p class="text-slate-500 text-sm mt-2">Thiết kế hiện đại kết hợp nội thất gỗ tự nhiên ấm cúng cùng tầm nhìn bao trọn vịnh Nha Trang.</p>
+        </div>
+
+        <!-- Filter tabs & Add Room button -->
+        <div id="room-filter-container" class="flex flex-wrap gap-2 items-center">
+          <!-- Dynamically populated with + Thêm phòng button -->
+        </div>
+      </div>
+
+      <!-- Container dynamic rooms -->
+      <div id="rooms-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Rendered by js/app.js -->
+      </div>
+    </div>
+  </section>
+
+  
+  </div><!-- END view-phong-nghi -->
+
+  <!-- PAGE VIEW: DỊCH VỤ VIP -->
+  <div id="view-dich-vu" class="page-view hidden">
+  <!-- SERVICES SECTION -->
+  <section id="dich-vu" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-16 gap-6">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-600"><a href="#trang-chu" onclick="window.navigateToPage('trang-chu'); return false;" class="hover:underline text-slate-500">Trang chủ</a> / Dịch Vụ Đi Kèm</span>
+        <h2 class="text-3xl sm:text-4xl font-bold font-serif text-slate-900 mt-2 mb-2">Tiện Ích & Trải Nghiệm Khách Sạn</h2>
+        <p class="text-slate-500 text-sm">Thêm các dịch vụ thượng hạng vào chuyến đi để kỳ nghỉ của bạn thêm phần thăng hoa và đáng nhớ.</p>
+      </div>
+      <div>
+        <button onclick="window.openServiceModal()" class="px-4 py-2.5 rounded-xl bg-amber-50 text-amber-700 border border-amber-300 hover:bg-amber-100 font-semibold text-xs transition-all flex items-center gap-2 shadow-sm">
+          <i class="fa-solid fa-circle-plus"></i> Thêm dịch vụ mới
+        </button>
+      </div>
+    </div>
+
+    <!-- Container dynamic services -->
+    <div id="services-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Rendered by js/app.js -->
+    </div>
+  </section>
+
+  
+  </div><!-- END view-dich-vu -->
+
+  <!-- PAGE VIEW: ĐẶT PHÒNG -->
+  <div id="view-dat-phong" class="page-view hidden">
+  <!-- BOOKING SECTION -->
+  <section id="dat-phong" class="bg-navy-900 text-white py-20 px-4 sm:px-8 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-400"><a href="#trang-chu" onclick="window.navigateToPage('trang-chu'); return false;" class="hover:underline text-slate-400">Trang chủ</a> / Đặt Phòng Trực Tuyến</span>
+        <h2 class="text-3xl sm:text-4xl font-bold font-serif text-white mt-2 mb-3">Đặt Phòng <span class="hotel-name-text">Khách Sạn Ánh Dương</span></h2>
+        <p class="text-slate-400 text-xs sm:text-sm">Xác nhận giữ phòng tức thì • Giảm giá khi nhập mã ưu đãi • Thanh toán cọc bảo lãnh 30% an toàn.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Form left -->
+        <div class="lg:col-span-7 bg-white text-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl">
+          <form onsubmit="window.handleBookingSubmit(event)" class="space-y-6">
+            <div id="booking-lock-banner" class="hidden p-3 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-center justify-between text-xs text-amber-800 mb-2">
+              <span class="flex items-center gap-2 text-amber-900 font-medium">
+                <i class="fa-solid fa-clock text-amber-600 animate-pulse"></i>
+                <span>Khóa giữ phòng 15 phút:</span>
+              </span>
+              <strong id="lock-countdown-timer" class="font-mono text-amber-700 text-sm bg-amber-100 px-2 py-0.5 rounded-lg border border-amber-300">15:00</strong>
+            </div>
+            <h3 class="text-xl font-bold font-serif text-slate-900 border-b border-slate-100 pb-3 flex items-center justify-between">
+              <span>Thông tin đặt phòng</span>
+              <span class="text-xs font-sans text-amber-600 font-semibold bg-amber-50 px-3 py-1 rounded-full">Bước 1 / 2</span>
+            </h3>
+
+            <!-- Room selection & Dates -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Hạng phòng muốn đặt</label>
+                <select id="booking-room-type" class="w-full text-xs font-medium border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-amber-500">
+                  <!-- Dynamically populated -->
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Ngày nhận phòng</label>
+                <input type="date" id="cust-checkin" class="w-full text-xs font-medium border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-amber-500" required>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Ngày trả phòng</label>
+                <input type="date" id="cust-checkout" class="w-full text-xs font-medium border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-amber-500" required>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Số người lớn</label>
+                <select id="cust-adults" class="w-full text-xs font-medium border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-amber-500">
+                  <option value="1">1 Người lớn</option>
+                  <option value="2" selected>2 Người lớn</option>
+                  <option value="3">3 Người lớn</option>
+                  <option value="4">4 Người lớn</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Trẻ em (Dưới 12 tuổi)</label>
+                <select id="cust-children" class="w-full text-xs font-medium border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-amber-500">
+                  <option value="0" selected>0 Trẻ em</option>
+                  <option value="1">1 Trẻ em</option>
+                  <option value="2">2 Trẻ em</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Additional Services -->
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Dịch vụ cộng thêm mong muốn:</label>
+              <div id="booking-services-checkboxes" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+
+            <h3 class="text-xl font-bold font-serif text-slate-900 border-b border-slate-100 pb-3 pt-2">
+              Thông tin người đặt & Liên hệ
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Họ và tên quý khách *</label>
+                <input type="text" id="cust-name" placeholder="Ví dụ: Nguyễn Văn An" class="w-full text-xs border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-amber-500" required>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Số điện thoại liên hệ *</label>
+                <input type="tel" id="cust-phone" placeholder="Ví dụ: 0912 345 678" class="w-full text-xs border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-amber-500" required>
+              </div>
+
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Email nhận mã xác nhận</label>
+                <input type="email" id="cust-email" placeholder="Ví dụ: customer@gmail.com" class="w-full text-xs border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-amber-500">
+              </div>
+
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Yêu cầu đặc biệt (nếu có)</label>
+                <textarea id="cust-notes" rows="2" placeholder="Ví dụ: Phòng tầng cao yên tĩnh, chuẩn bị nôi em bé..." class="w-full text-xs border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-amber-500"></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="w-full py-4 gold-gradient text-white rounded-xl font-bold text-sm uppercase tracking-wider shadow-xl hover:opacity-95 transition-all">
+              <i class="fa-solid fa-lock mr-2"></i> Hoàn tất đặt phòng & Nhận hóa đơn
+            </button>
+          </form>
+        </div>
+
+        <!-- Summary & QR transfer right -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="bg-navy-800 rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl">
+            <h3 class="text-lg font-bold font-serif text-amber-300 mb-4 pb-3 border-b border-slate-700 flex items-center justify-between">
+              <span>Bảng kê chi phí lưu trú</span>
+              <i class="fa-solid fa-receipt text-amber-400"></i>
+            </h3>
+
+            <!-- Price Breakdown -->
+            <div class="space-y-3 text-xs text-slate-300 pb-4 border-b border-slate-700">
+              <div class="flex justify-between items-center">
+                <span id="calc-room-name">Standard City View</span>
+                <span id="calc-nights" class="text-amber-400 font-semibold">2 đêm</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-400">Tiền phòng:</span>
+                <strong id="calc-room-total" class="text-white text-sm">1.700.000 ₫</strong>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-400">Dịch vụ đi kèm:</span>
+                <strong id="calc-services-total" class="text-white text-sm">0 ₫</strong>
+              </div>
+              <div id="calc-discount-row" class="flex justify-between items-center text-emerald-400 hidden">
+                <span>Khuyến mãi voucher:</span>
+                <strong id="calc-discount" class="text-sm">-0 ₫</strong>
+              </div>
+            </div>
+
+            <!-- Coupon input -->
+            <div class="pt-4 pb-4 border-b border-slate-700">
+              <label class="block text-xs font-semibold text-slate-400 mb-1.5">Mã giảm giá ưu đãi</label>
+              <div class="flex gap-2">
+                <input type="text" id="coupon-input" placeholder="Nhập: ANHDUONG2026 hoặc VIP2026" class="flex-1 bg-navy-900 border border-slate-600 rounded-xl px-3 py-2 text-xs text-white uppercase focus:ring-amber-500 focus:outline-none">
+                <button type="button" onclick="window.applyCoupon()" class="px-4 py-2 bg-amber-600 text-white rounded-xl text-xs font-semibold hover:bg-amber-500 transition-colors">
+                  Áp dụng
+                </button>
+              </div>
+              <p id="coupon-msg" class="text-xs mt-1.5"></p>
+            </div>
+
+            <!-- Total -->
+            <div class="pt-4 space-y-2">
+              <div class="flex justify-between items-baseline">
+                <span class="text-sm font-semibold text-slate-300">Tổng tiền thanh toán:</span>
+                <strong id="calc-final-total" class="text-2xl font-bold text-amber-400">1.700.000 ₫</strong>
+              </div>
+              <div class="flex justify-between items-baseline p-3 bg-amber-500/10 rounded-xl border border-amber-500/30 text-xs">
+                <span class="text-amber-200">Tiền cọc giữ phòng (30%):</span>
+                <strong id="calc-deposit-amount" class="text-base font-bold text-amber-300">510.000 ₫</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bank QR card -->
+          <div class="bg-navy-800 rounded-3xl p-6 border border-slate-700/80 shadow-2xl flex items-center gap-5">
+            <div class="bg-white p-2 rounded-2xl shadow-inner shrink-0">
+              <img id="booking-vietqr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=2026-ANHDUONG-HOTEL-510000" alt="VietQR" class="w-28 h-28 object-contain">
+            </div>
+            <div class="text-xs text-slate-300 space-y-1">
+              <div class="font-bold text-amber-400 text-sm">Chuyển khoản QR bảo đảm</div>
+              <div>Ngân hàng: <strong id="hotel-bank-name">MB Bank (Quân Đội)</strong></div>
+              <div>STK: <strong id="hotel-bank-acc" class="text-white text-sm tracking-wider">8888 9999 6666</strong></div>
+              <div>Tên: <strong id="hotel-bank-owner">CTCP KHACH SAN ANH DUONG</strong></div>
+              <div class="text-[11px] text-slate-400 pt-1">Quét mã QR tự động điền số tiền và ghi nhận tức thì.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  </div><!-- END view-dat-phong -->
+
+  <!-- PAGE VIEW: TRA CỨU ĐƠN -->
+  <div id="view-tra-cuu" class="page-view hidden">
+  <!-- MY BOOKINGS / LOOKUP -->
+  <section id="tra-cuu" class="py-20 px-4 sm:px-8 max-w-5xl mx-auto">
+    <div class="text-center max-w-xl mx-auto mb-10">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-600"><a href="#trang-chu" onclick="window.navigateToPage('trang-chu'); return false;" class="hover:underline text-slate-500">Trang chủ</a> / Tra Cứu Nhanh Chóng</span>
+      <h2 class="text-3xl font-bold font-serif text-slate-900 mt-2 mb-3">Kiểm Tra Đơn Đặt Phòng Của Bạn</h2>
+      <p class="text-slate-500 text-xs sm:text-sm">Nhập mã đơn (Ví dụ: <strong>AD-2026-8910</strong>) hoặc số điện thoại đã dùng để đặt phòng.</p>
+    </div>
+
+    <div class="bg-white p-4 sm:p-6 rounded-3xl shadow-sm border border-slate-200 mb-8 flex flex-col sm:flex-row gap-3">
+      <div class="flex-1 relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400"></i>
+        <input type="text" id="lookup-input" placeholder="Nhập mã đơn (AD-2026-XXXX) hoặc số điện thoại..." class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500">
+      </div>
+      <button onclick="window.searchMyBookings()" class="px-8 py-3 gold-gradient text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:opacity-95 transition-all">
+        Tra cứu ngay
+      </button>
+    </div>
+
+    <!-- Lookup results container -->
+    <div id="lookup-results" class="space-y-4">
+      <div class="text-center py-8 text-slate-400 text-xs">
+        <i class="fa-solid fa-receipt text-3xl text-slate-200 block mb-2"></i>
+        Nhập thông tin bên trên để xem chi tiết tình trạng đơn đặt phòng của bạn.
+      </div>
+    </div>
+  </section>
+
+  
+  </div><!-- END view-tra-cuu -->
+
+  <!-- PAGE VIEW: QUẢN TRỊ VIÊN -->
+  <div id="view-admin-portal" class="page-view hidden">
+  <!-- ADMIN PORTAL SECTION -->
+  <section id="admin-portal" class="bg-slate-900 text-white py-20 px-4 sm:px-8 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-slate-800 gap-4 mb-8">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-400"><a href="#trang-chu" onclick="window.navigateToPage('trang-chu'); return false;" class="hover:underline text-slate-400">Trang chủ</a> / Hệ Thống Quản Trị Khách Sạn</span>
+          <h2 class="text-3xl font-bold font-serif text-white mt-1">Bảng Điều Khiển Quản Trị Viên</h2>
+          <p class="text-slate-400 text-xs mt-1">Thêm và sửa hạng phòng, chỉnh sửa thông tin khách sạn và kiểm soát đơn đặt phòng.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Role Switcher -->
+          <div id="role-switcher-bar" class="flex items-center gap-1 bg-slate-800/90 p-1 rounded-lg border border-slate-700">
+            <span class="text-slate-400 text-xs px-2"><i class="fa-solid fa-user-shield text-amber-400 mr-1.5"></i>Chế độ xem:</span>
+            <button type="button" onclick="window.switchUserRole('customer')" id="role-btn-customer" class="px-2.5 py-1 rounded text-xs bg-amber-500/20 text-amber-300 border border-amber-500/40 font-semibold transition-all">Khách hàng</button>
+            <button type="button" onclick="window.switchUserRole('receptionist')" id="role-btn-receptionist" class="px-2.5 py-1 rounded text-xs bg-slate-800 text-slate-300 hover:text-white transition-all">Lễ tân</button>
+            <button type="button" onclick="window.switchUserRole('admin')" id="role-btn-admin" class="px-2.5 py-1 rounded text-xs bg-slate-800 text-slate-300 hover:text-white transition-all">Admin</button>
+          </div>
+          <div id="connection-status-pill" class="flex items-center gap-1.5 text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 py-1.5 rounded-lg">
+            <span id="conn-dot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="conn-text">LocalStorage</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tab Switcher -->
+      <div class="flex flex-wrap gap-2 mb-8 border-b border-slate-800 pb-4">
+        <button id="btn-admin-overview" onclick="window.switchAdminTab('overview')" class="px-4 py-2.5 rounded-xl text-xs font-semibold gold-gradient text-white shadow-md transition-all flex items-center gap-2">
+          <i class="fa-solid fa-chart-line"></i> Sơ đồ phòng & Đơn đặt
+        </button>
+        <button id="btn-admin-rooms" onclick="window.switchAdminTab('rooms')" class="px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-all border border-slate-700 flex items-center gap-2">
+          <i class="fa-solid fa-bed"></i> Quản lý Hạng phòng (Sửa giá & thông tin)
+        </button>
+        <button id="btn-admin-services" onclick="window.switchAdminTab('services')" class="px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-all border border-slate-700 flex items-center gap-2">
+          <i class="fa-solid fa-bell-concierge"></i> Quản lý Dịch vụ VIP (Sửa giá & gói)
+        </button>
+        <button id="btn-admin-hotel" onclick="window.switchAdminTab('hotel')" class="px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-all border border-slate-700 flex items-center gap-2">
+          <i class="fa-solid fa-hotel"></i> Cài đặt Khách sạn (Sửa thông tin)
+        </button>
+      </div>
+
+      <!-- TAB 1: OVERVIEW & ROOM RACK & BOOKINGS -->
+      <div id="admin-tab-overview" class="space-y-10">
+        <!-- KPI Metrics -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700">
+            <span class="text-xs text-slate-400 block mb-1">Tổng Doanh Thu</span>
+            <strong id="admin-stat-revenue" class="text-xl sm:text-2xl font-bold text-amber-400 font-serif">17.310.000 ₫</strong>
+            <span class="text-[11px] text-emerald-400 block mt-1"><i class="fa-solid fa-arrow-up mr-1"></i>Tự động tính từ đơn</span>
+          </div>
+
+          <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700">
+            <span class="text-xs text-slate-400 block mb-1">Số Lượng Đơn Đặt</span>
+            <strong id="admin-stat-bookings" class="text-xl sm:text-2xl font-bold text-white font-serif">3 đơn</strong>
+            <span class="text-[11px] text-slate-400 block mt-1">Đã lưu trữ hệ thống</span>
+          </div>
+
+          <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700">
+            <span class="text-xs text-slate-400 block mb-1">Tỷ Lệ Lấp Đầy</span>
+            <strong id="admin-stat-occupancy" class="text-xl sm:text-2xl font-bold text-blue-400 font-serif">38%</strong>
+            <span class="text-[11px] text-slate-400 block mt-1">Phòng đang ở & đã đặt</span>
+          </div>
+
+          <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700">
+            <span class="text-xs text-slate-400 block mb-1">Phòng Trống Sẵn Sàng</span>
+            <strong id="admin-stat-available" class="text-xl sm:text-2xl font-bold text-emerald-400 font-serif">10/16</strong>
+            <span class="text-[11px] text-slate-400 block mt-1">Sẵn sàng nhận khách</span>
+          </div>
+        </div>
+
+        <!-- Room Rack Matrix -->
+        <div class="bg-slate-800/60 rounded-3xl p-6 border border-slate-700">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-700 gap-3 mb-6">
+            <h3 class="font-serif font-bold text-lg text-white">Sơ đồ phòng theo tầng (Room Rack)</h3>
+            <div class="flex flex-wrap items-center gap-3 text-xs text-slate-300">
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-emerald-100 border border-emerald-400 inline-block"></span> Trống</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-rose-100 border border-rose-400 inline-block"></span> Đang ở</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-amber-100 border border-amber-400 inline-block"></span> Đã đặt</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-slate-200 border border-slate-400 inline-block"></span> Bảo trì</span>
+              <span class="text-[11px] text-amber-400 italic">(Nhấp vào phòng để đổi trạng thái)</span>
+            </div>
+          </div>
+
+          <div id="admin-rack-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-3">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Bookings Management Table -->
+        <div class="bg-slate-800/60 rounded-3xl p-6 border border-slate-700 overflow-hidden">
+          <h3 class="font-serif font-bold text-lg text-white mb-4">Danh sách đơn đặt phòng gần nhất</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="text-xs uppercase text-slate-400 border-b border-slate-700">
+                  <th class="p-3">Mã đơn</th>
+                  <th class="p-3">Khách hàng</th>
+                  <th class="p-3">Hạng phòng & Số</th>
+                  <th class="p-3">Ngày lưu trú</th>
+                  <th class="p-3">Tổng tiền</th>
+                  <th class="p-3">Trạng thái</th>
+                  <th class="p-3 text-right">In phiếu</th>
+                </tr>
+              </thead>
+              <tbody id="admin-bookings-table" class="divide-y divide-slate-700/50">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: ROOM TYPES MANAGEMENT (ADD / EDIT / DELETE) -->
+      <div id="admin-tab-rooms" class="hidden space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 bg-slate-800/70 rounded-2xl border border-slate-700">
+          <div>
+            <h3 class="font-serif font-bold text-lg text-white">Quản lý danh sách Hạng phòng</h3>
+            <p class="text-slate-400 text-xs mt-0.5">Thêm phòng mới, cập nhật giá, diện tích, hình ảnh và tiện nghi phục vụ khách hàng.</p>
+          </div>
+          <button onclick="window.openRoomTypeModal()" class="px-5 py-2.5 gold-gradient text-white font-semibold text-xs rounded-xl shadow hover:opacity-95 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-circle-plus"></i> Thêm Hạng Phòng Mới
+          </button>
+        </div>
+
+        <!-- Room Types Grid -->
+        <div id="admin-room-types-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- TAB 2B: SERVICES MANAGEMENT (ADD / EDIT / DELETE) -->
+      <div id="admin-tab-services" class="hidden space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 bg-slate-800/70 rounded-2xl border border-slate-700">
+          <div>
+            <h3 class="font-serif font-bold text-lg text-white">Quản lý Gói Dịch vụ VIP & Trải nghiệm</h3>
+            <p class="text-slate-400 text-xs mt-0.5">Chỉnh sửa đơn giá, đơn vị tính, hình ảnh và mô tả các dịch vụ đi kèm khi khách đặt phòng.</p>
+          </div>
+          <button onclick="window.openServiceModal()" class="px-5 py-2.5 gold-gradient text-white font-semibold text-xs rounded-xl shadow hover:opacity-95 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-circle-plus"></i> Thêm Gói Dịch Vụ Mới
+          </button>
+        </div>
+
+        <!-- Services Grid -->
+        <div id="admin-services-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- TAB 3: HOTEL INFO EDIT SETTINGS -->
+      <div id="admin-tab-hotel" class="hidden">
+        <div class="bg-slate-800/70 rounded-3xl p-6 sm:p-8 border border-slate-700">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-700 gap-4 mb-6">
+            <div>
+              <h3 class="font-serif font-bold text-xl text-white">Chỉnh sửa Thông tin Khách Sạn</h3>
+              <p class="text-slate-400 text-xs mt-0.5">Thay đổi tên, địa chỉ, hotline, giờ nhận trả phòng và tài khoản ngân hàng nhận tiền cọc.</p>
+            </div>
+            <button type="button" onclick="window.handleResetHotelInfo()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-xl text-xs font-medium transition-colors">
+              <i class="fa-solid fa-rotate-left mr-1.5"></i>Khôi phục mặc định
+            </button>
+          </div>
+
+          <form onsubmit="window.handleSaveHotelInfo(event)" class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-xs">
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Tên khách sạn *</label>
+                <input type="text" id="edit-hotel-name" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500" required>
+              </div>
+
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Thương hiệu / Khẩu hiệu *</label>
+                <input type="text" id="edit-hotel-brand" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500" required>
+              </div>
+
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Hotline tổng đài (24/7) *</label>
+                <input type="text" id="edit-hotel-hotline" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500" required>
+              </div>
+
+              <div class="sm:col-span-2">
+                <label class="block font-semibold text-slate-300 mb-1.5">Địa chỉ khách sạn *</label>
+                <input type="text" id="edit-hotel-address" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500" required>
+              </div>
+
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Số điện thoại lễ tân</label>
+                <input type="text" id="edit-hotel-phone" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500">
+              </div>
+
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Email liên hệ chung</label>
+                <input type="email" id="edit-hotel-email" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500">
+              </div>
+
+              <div>
+                <label class="block font-semibold text-slate-300 mb-1.5">Email nhận đặt phòng</label>
+                <input type="email" id="edit-hotel-booking-email" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500">
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block font-semibold text-slate-300 mb-1.5">Giờ nhận phòng</label>
+                  <input type="text" id="edit-hotel-checkin" placeholder="14:00" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-300 mb-1.5">Giờ trả phòng</label>
+                  <input type="text" id="edit-hotel-checkout" placeholder="12:00" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500">
+                </div>
+              </div>
+
+              <div class="sm:col-span-3 pt-4 border-t border-slate-700">
+                <h4 class="font-bold text-amber-400 text-sm mb-3"><i class="fa-solid fa-building-columns mr-1.5"></i>Tài khoản ngân hàng nhận tiền cọc (VietQR)</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Tên ngân hàng</label>
+                    <input type="text" id="edit-hotel-bank-name" placeholder="Ví dụ: MB Bank (Quân Đội)" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500">
+                  </div>
+                  <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Số tài khoản ngân hàng</label>
+                    <input type="text" id="edit-hotel-bank-acc" placeholder="Ví dụ: 888899996666" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500">
+                  </div>
+                  <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Chủ tài khoản (viết hoa không dấu)</label>
+                    <input type="text" id="edit-hotel-bank-owner" placeholder="Ví dụ: CTCP KHACH SAN ANH DUONG" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500">
+                  </div>
+                </div>
+              </div>
+
+              <div class="sm:col-span-3">
+                <label class="block font-semibold text-slate-300 mb-1.5">Đoạn giới thiệu khách sạn</label>
+                <textarea id="edit-hotel-desc" rows="3" class="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white focus:ring-2 focus:ring-amber-500 leading-relaxed"></textarea>
+              </div>
+            </div>
+
+            <div class="flex justify-end pt-4 border-t border-slate-700">
+              <button type="submit" class="px-8 py-3.5 gold-gradient text-white rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-95 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-floppy-disk"></i> Lưu thay đổi thông tin khách sạn
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  </div><!-- END view-admin-portal -->
+
+  <!-- PAGE VIEW: GIỚI THIỆU & LIÊN HỆ -->
+  <div id="view-gioi-thieu" class="page-view hidden">
+  <!-- ABOUT & CONTACT -->
+  <section id="gioi-thieu" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-600"><a href="#trang-chu" onclick="window.navigateToPage('trang-chu'); return false;" class="hover:underline text-slate-500">Trang chủ</a> / Về Chúng Tôi</span>
+        <h2 class="text-3xl sm:text-4xl font-bold font-serif text-slate-900 mt-2 mb-4 leading-tight">
+          Nơi Bình Minh Tỏa Rạng<br>Và Kỳ Nghỉ Bắt Đầu
+        </h2>
+        <p class="text-slate-600 text-sm leading-relaxed mb-4 hotel-desc-text">
+          Tọa lạc trên cung đường biển vàng Trần Phú, <span class="hotel-name-text">Khách sạn Ánh Dương</span> tự hào là biểu tượng kiến trúc nghỉ dưỡng 5 sao hòa quyện giữa phong cách sang trọng đương đại và lòng hiếu khách nồng hậu của con người xứ Trầm Hương.
+        </p>
+        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+          Với các phòng nghỉ chuẩn quốc tế, hồ bơi vô cực ngắm hoàng hôn, spa trị liệu chuyên sâu và phong vị ẩm thực đặc sắc, Ánh Dương cam kết mang đến những khoảnh khắc nghỉ ngơi đáng giá nhất cho bạn và gia đình.
+        </p>
+
+        <div class="grid grid-cols-2 gap-4 text-xs text-slate-700 border-t border-slate-100 pt-6">
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-location-dot text-amber-600 text-lg mt-0.5"></i>
+            <div>
+              <strong>Địa chỉ:</strong>
+              <p class="text-slate-500 mt-0.5 hotel-address-text">88 Trần Phú, Lộc Thọ, Nha Trang, Khánh Hòa</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-phone text-amber-600 text-lg mt-0.5"></i>
+            <div>
+              <strong>Tổng đài 24/7:</strong>
+              <p class="text-slate-500 mt-0.5"><span class="hotel-hotline-text">1900 888 666</span> / <span class="hotel-phone-text">0258.3888.999</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
+        <h3 class="font-serif font-bold text-xl text-slate-900 mb-2">Gửi lời nhắn cho chúng tôi</h3>
+        <p class="text-xs text-slate-500 mb-6">Quý khách cần hỗ trợ đặt tiệc, hội nghị hay tư vấn tour riêng? Đội ngũ sẽ phản hồi trong 15 phút.</p>
+
+        <form onsubmit="event.preventDefault(); showToast('Đã gửi liên hệ thành công! Nhân viên sẽ gọi lại cho bạn.'); this.reset();" class="space-y-4 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Họ tên quý khách</label>
+            <input type="text" placeholder="Nguyễn Văn A" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500" required>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Số điện thoại</label>
+              <input type="tel" placeholder="0987654321" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500" required>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Email</label>
+              <input type="email" placeholder="example@gmail.com" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500">
+            </div>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Nội dung yêu cầu</label>
+            <textarea rows="3" placeholder="Nội dung cần tư vấn..." class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500" required></textarea>
+          </div>
+          <button type="submit" class="w-full py-3.5 gold-gradient text-white rounded-xl font-bold uppercase tracking-wider shadow-md hover:opacity-95 transition-all">
+            Gửi yêu cầu hỗ trợ
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- END view-gioi-thieu -->
+
+  <!-- FOOTER -->
+  <footer class="bg-navy-950 text-slate-400 text-xs pt-16 pb-8 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl gold-gradient flex items-center justify-center text-white">
+            <i class="fa-solid fa-crown text-lg"></i>
+          </div>
+          <div>
+            <span class="font-serif text-lg font-bold text-white tracking-wide block hotel-name-text">ÁNH DƯƠNG</span>
+            <span class="text-[9px] tracking-widest text-amber-500 font-semibold uppercase block hotel-brand-text">Luxury Hotel</span>
+          </div>
+        </div>
+        <p class="text-slate-400 leading-relaxed mb-4">
+          Trải nghiệm thiên đường nghỉ dưỡng 5 sao quốc tế tại vịnh biển Nha Trang với dịch vụ đỉnh cao và view biển ngoạn mục.
+        </p>
+        <div class="flex items-center gap-3 text-slate-300">
+          <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:text-amber-400 hover:bg-slate-700 transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:text-amber-400 hover:bg-slate-700 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:text-amber-400 hover:bg-slate-700 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:text-amber-400 hover:bg-slate-700 transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-serif font-bold text-white text-sm mb-4">Liên kết nhanh</h4>
+        <ul class="space-y-2.5">
+          <li><a href="#trang-chu" onclick="window.navigateToPage('trang-chu'); return false;" class="hover:text-amber-400 transition-colors">Trang chủ</a></li>
+          <li><a href="#phong-nghi" onclick="window.navigateToPage('phong-nghi'); return false;" class="hover:text-amber-400 transition-colors">Hạng phòng & Villa</a></li>
+          <li><a href="#dich-vu" onclick="window.navigateToPage('dich-vu'); return false;" class="hover:text-amber-400 transition-colors">Dịch vụ & Tiện ích</a></li>
+          <li><a href="#dat-phong" onclick="window.navigateToPage('dat-phong'); return false;" class="hover:text-amber-400 transition-colors">Đặt phòng trực tuyến</a></li>
+          <li><a href="#tra-cuu" onclick="window.navigateToPage('tra-cuu'); return false;" class="hover:text-amber-400 transition-colors">Tra cứu mã đặt phòng</a></li>
+          <li><a href="#admin-portal" onclick="window.navigateToPage('admin-portal'); return false;" class="hover:text-amber-400 transition-colors">Cổng quản trị khách sạn</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-serif font-bold text-white text-sm mb-4">Chính sách & Quy định</h4>
+        <ul class="space-y-2.5">
+          <li><a href="#" class="hover:text-amber-400 transition-colors">Quy định nhận và trả phòng</a></li>
+          <li><a href="#" class="hover:text-amber-400 transition-colors">Chính sách hoàn tiền & hủy phòng</a></li>
+          <li><a href="#" class="hover:text-amber-400 transition-colors">Chính sách bảo mật khách hàng</a></li>
+          <li><a href="#" class="hover:text-amber-400 transition-colors">Tiêu chuẩn an toàn lưu trú 5 sao</a></li>
+          <li><a href="#" class="hover:text-amber-400 transition-colors">Quy định vật nuôi & Trẻ em</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-serif font-bold text-white text-sm mb-4">Đăng ký nhận ưu đãi</h4>
+        <p class="text-slate-400 leading-relaxed mb-3">Nhận thông báo voucher giảm giá 15% - 25% trong các mùa nghỉ dưỡng.</p>
+        <form onsubmit="event.preventDefault(); showToast('Đăng ký email nhận ưu đãi thành công!'); this.reset();" class="flex gap-2">
+          <input type="email" placeholder="Email của bạn..." class="bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:ring-1 focus:ring-amber-500 w-full" required>
+          <button type="submit" class="px-4 py-2 gold-gradient text-white rounded-xl font-bold hover:opacity-95">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-slate-500 text-[11px]">
+      <div>
+        © 2026 <span class="hotel-name-text">Khách Sạn Ánh Dương</span>. Bản quyền thuộc về Công ty Cổ phần Khách Sạn Ánh Dương Nha Trang.
+      </div>
+      <div>
+        Frontend Architecture: Pure HTML5 • CSS3 • JavaScript (LocalStorage Native)
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL: ADD / EDIT ROOM TYPE -->
+  <div id="room-type-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-6 sm:p-8 animate-fade-in text-slate-800">
+      <div class="flex justify-between items-center pb-4 border-b border-slate-100">
+        <div>
+          <span class="text-xs font-semibold text-amber-600 uppercase tracking-widest">Khu Vực Quản Trị</span>
+          <h3 id="room-modal-title" class="text-2xl font-bold font-serif text-slate-900 mt-0.5">Thêm Hạng Phòng Mới</h3>
+        </div>
+        <button onclick="window.closeRoomTypeModal()" class="text-slate-400 hover:text-slate-600 text-2xl w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100">
+          &times;
+        </button>
+      </div>
+
+      <form onsubmit="window.handleSaveRoomType(event)" class="mt-6 space-y-4 text-xs">
+        <input type="hidden" id="form-room-id" value="">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="sm:col-span-2">
+            <label class="block font-semibold text-slate-700 mb-1">Tên hạng phòng *</label>
+            <input type="text" id="form-room-name" placeholder="Ví dụ: Premier Ocean Balcony Suite" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500" required>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Mã viết tắt (Code)</label>
+            <input type="text" id="form-room-code" placeholder="Ví dụ: POB" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500" required>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Giá mỗi đêm (VNĐ) *</label>
+            <input type="number" id="form-room-price" placeholder="1850000" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500" required>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Diện tích (m²)</label>
+            <input type="number" id="form-room-size" placeholder="45" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Loại giường</label>
+            <input type="text" id="form-room-bed" placeholder="1 Giường King Size cỡ lớn" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Số người lớn tối đa</label>
+            <input type="number" id="form-room-adults" value="2" min="1" max="10" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Số trẻ em tối đa</label>
+            <input type="number" id="form-room-children" value="1" min="0" max="10" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Tầm nhìn (View)</label>
+            <input type="text" id="form-room-view" placeholder="Hướng biển trực diện (Ocean View)" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500">
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Huy hiệu nổi bật (Badge)</label>
+            <input type="text" id="form-room-badge" placeholder="Bán chạy nhất / Mới ra mắt / Tiết kiệm" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500">
+          </div>
+
+          <div class="sm:col-span-2">
+            <label class="block font-semibold text-slate-700 mb-1">URL ảnh đại diện phòng</label>
+            <input type="url" id="form-room-image" placeholder="https://images.unsplash.com/..." class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500">
+          </div>
+
+          <div class="sm:col-span-2">
+            <label class="block font-semibold text-slate-700 mb-1">Tiện nghi (ngăn cách bởi dấu phẩy)</label>
+            <input type="text" id="form-room-amenities" placeholder="Wifi 5G, Smart TV 55 inch, Bồn tắm nằm, Ban công riêng, Minibar" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500">
+          </div>
+
+          <div class="sm:col-span-2">
+            <label class="block font-semibold text-slate-700 mb-1">Mô tả phòng chi tiết</label>
+            <textarea id="form-room-desc" rows="3" placeholder="Mô tả không gian và trải nghiệm nghỉ dưỡng..." class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500"></textarea>
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
+          <button type="button" onclick="window.closeRoomTypeModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-colors">
+            Hủy bỏ
+          </button>
+          <button type="submit" class="px-6 py-2.5 gold-gradient text-white font-semibold rounded-xl hover:opacity-95 shadow transition-all">
+            Lưu hạng phòng
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD / EDIT SERVICE PRODUCT -->
+  <div id="service-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-6 sm:p-8 animate-fade-in text-slate-800">
+      <div class="flex justify-between items-center pb-4 border-b border-slate-100">
+        <div>
+          <span class="text-xs font-semibold text-amber-600 uppercase tracking-widest">Khu Vực Quản Trị</span>
+          <h3 id="service-modal-title" class="text-2xl font-bold font-serif text-slate-900 mt-0.5">Chỉnh sửa Dịch vụ</h3>
+        </div>
+        <button onclick="window.closeServiceModal()" class="text-slate-400 hover:text-slate-600 text-2xl w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100">
+          &times;
+        </button>
+      </div>
+
+      <form onsubmit="window.handleSaveService(event)" class="mt-6 space-y-4 text-xs">
+        <input type="hidden" id="form-service-id" value="">
+
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Tên gói dịch vụ / Trải nghiệm *</label>
+          <input type="text" id="form-service-name" placeholder="Ví dụ: Buffet Sáng Quốc Tế Thượng Hạng" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500" required>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Đơn giá (VNĐ) *</label>
+            <input type="number" id="form-service-price" placeholder="220000" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500" required>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Đơn vị tính</label>
+            <input type="text" id="form-service-unit" placeholder="người/ngày / chuyến / cặp đôi" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500" required>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Biểu tượng FontAwesome (Icon)</label>
+            <input type="text" id="form-service-icon" placeholder="fa-utensils / fa-spa / fa-van-shuttle" class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">URL Hình ảnh</label>
+            <input type="url" id="form-service-image" placeholder="https://images.unsplash.com/..." class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Mô tả dịch vụ chi tiết</label>
+          <textarea id="form-service-desc" rows="3" placeholder="Mô tả các tiện ích và đặc quyền của gói dịch vụ..." class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500"></textarea>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
+          <button type="button" onclick="window.closeServiceModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-colors">
+            Hủy bỏ
+          </button>
+          <button type="submit" class="px-6 py-2.5 gold-gradient text-white font-semibold rounded-xl hover:opacity-95 shadow transition-all">
+            Lưu dịch vụ
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ROOM DETAIL MODAL -->
+  <div id="room-detail-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div id="room-detail-content" class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-fade-in">
+      <!-- Injected via js/app.js -->
+    </div>
+  </div>
+
+  <!-- INVOICE / E-TICKET CONFIRMATION MODAL -->
+  <div id="invoice-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 animate-fade-in">
+      <!-- Printable Area -->
+      <div id="invoice-print-area">
+        <!-- Injected via js/app.js -->
+      </div>
+
+      <!-- Action buttons -->
+      <div class="mt-6 flex justify-end gap-3 pt-4 border-t border-slate-100 no-print">
+        <button onclick="window.print()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition-colors">
+          <i class="fa-solid fa-print mr-1.5"></i> In hóa đơn / Lưu PDF
+        </button>
+        <button onclick="window.closeInvoiceModal()" class="px-5 py-2.5 gold-gradient text-white text-xs font-semibold rounded-xl hover:opacity-95 transition-all">
+          Đóng cửa sổ
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: RESCHEDULE BOOKING -->
+  <div id="reschedule-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl p-6 sm:p-8 animate-fade-in text-slate-800">
+      <div class="flex justify-between items-center pb-4 border-b border-slate-100">
+        <h3 class="text-lg font-bold font-serif text-slate-900">Đổi Lịch Đặt Phòng</h3>
+        <button onclick="window.closeRescheduleModal()" class="text-slate-400 hover:text-slate-600 text-2xl w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100">&times;</button>
+      </div>
+      <form onsubmit="window.handleConfirmReschedule(event)" class="mt-4 space-y-4 text-xs">
+        <input type="hidden" id="reschedule-booking-code" value="">
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Mã đơn đặt phòng:</label>
+          <input type="text" id="reschedule-display-code" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-600 font-mono" readonly>
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Ngày nhận phòng mới *</label>
+          <input type="date" id="reschedule-checkin" class="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500" required>
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Ngày trả phòng mới *</label>
+          <input type="date" id="reschedule-checkout" class="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-amber-500" required>
+        </div>
+        <div id="reschedule-price-preview" class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-800 text-[11px]">
+          <i class="fa-solid fa-circle-info mr-1 text-amber-600"></i>Khi đổi số đêm, tiền phòng và chiết khấu voucher sẽ được tự động tính toán lại.
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="window.closeRescheduleModal()" class="px-4 py-2 bg-slate-100 text-slate-700 font-semibold rounded-xl hover:bg-slate-200 transition-colors">Hủy bỏ</button>
+          <button type="submit" class="px-5 py-2 gold-gradient text-white font-semibold rounded-xl hover:opacity-95 shadow transition-all">Xác nhận đổi lịch</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= AUTH MODAL (ĐĂNG NHẬP / ĐĂNG KÝ / QUÊN MẬT KHẨU) ================= -->
+  <div id="auth-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl animate-fade-in grid grid-cols-1 md:grid-cols-5 border border-slate-200">
+      
+      <!-- Left Column: Hotel Banner & VIP Privileges -->
+      <div class="md:col-span-2 p-6 sm:p-8 flex flex-col justify-between relative" style="background: linear-gradient(165deg, #09131f 0%, #112238 60%, #060d17 100%); color: #ffffff; border-right: 1px solid #1e293b;">
+        <div class="space-y-4 relative z-10">
+          <!-- Logo & Brand Name -->
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-2xl gold-gradient flex items-center justify-center text-white shadow-lg shrink-0">
+              <i class="fa-solid fa-crown text-xl text-white"></i>
+            </div>
+            <div>
+              <span class="font-serif text-xl font-bold tracking-wide text-white block">ÁNH DƯƠNG</span>
+              <span style="color: #fbbf24;" class="text-[10px] tracking-[0.2em] font-bold uppercase block">Luxury Hotel & Resort</span>
+            </div>
+          </div>
+
+          <!-- Section Title -->
+          <div class="pt-2">
+            <h3 class="font-serif text-xl sm:text-2xl font-bold text-white leading-snug">
+              Đặc Quyền Thành Viên <span style="color: #fbbf24;" class="block mt-1 font-extrabold">VIP Ánh Dương</span>
+            </h3>
+            <p style="color: #cbd5e1;" class="text-xs mt-2.5 leading-relaxed font-medium">
+              Gia nhập ngay hôm nay để tận hưởng vô vàn ưu đãi độc quyền dành riêng cho bạn:
+            </p>
+          </div>
+
+          <!-- Privileges list with high-contrast gold badges -->
+          <ul class="space-y-3.5 text-xs pt-2 font-medium">
+            <li class="flex items-start gap-2.5">
+              <div style="background-color: #f59e0b; color: #09131f;" class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow font-bold text-xs">
+                <i class="fa-solid fa-check text-[10px]"></i>
+              </div>
+              <span style="color: #ffffff;" class="leading-snug">Giảm thêm <strong style="color: #fbbf24;" class="text-[13px] font-bold">10% - 15%</strong> cho tất cả các hạng phòng</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <div style="background-color: #f59e0b; color: #09131f;" class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow font-bold text-xs">
+                <i class="fa-solid fa-check text-[10px]"></i>
+              </div>
+              <span style="color: #ffffff;" class="leading-snug">Tích điểm nâng hạng thẻ và nhận <strong style="color: #fbbf24;" class="font-bold">đêm nghỉ miễn phí</strong></span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <div style="background-color: #f59e0b; color: #09131f;" class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow font-bold text-xs">
+                <i class="fa-solid fa-check text-[10px]"></i>
+              </div>
+              <span style="color: #ffffff;" class="leading-snug"><strong style="color: #fbbf24;" class="font-bold">Miễn phí</strong> nhận phòng sớm & trả phòng trễ (tùy tình trạng phòng)</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <div style="background-color: #f59e0b; color: #09131f;" class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow font-bold text-xs">
+                <i class="fa-solid fa-check text-[10px]"></i>
+              </div>
+              <span style="color: #ffffff;" class="leading-snug">Tặng voucher Spa trị liệu & <strong style="color: #fbbf24;" class="font-bold">Bữa sáng buffet cao cấp</strong></span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Security Footer -->
+        <div style="border-top: 1px solid #1e293b;" class="pt-4 mt-6 text-xs font-medium relative z-10">
+          <p class="flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-emerald-400 text-sm"></i>
+            <span style="color: #94a3b8;">Bảo mật thông tin chuẩn SSL 256-bit</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: Tabs & Forms -->
+      <div class="md:col-span-3 p-6 sm:p-8 flex flex-col justify-between bg-white max-h-[85vh] overflow-y-auto">
+        
+        <div>
+          <!-- Modal Top: Close button -->
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+            <div class="flex items-center gap-1.5 text-amber-700 text-xs font-bold uppercase tracking-wider">
+              <i class="fa-solid fa-sparkles text-amber-500"></i>
+              <span id="auth-modal-title">Cổng Đăng Nhập Thành Viên</span>
+            </div>
+            <button onclick="window.closeAuthModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center transition">
+              <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+          </div>
+
+          <!-- Auth Tabs Switcher -->
+          <div class="grid grid-cols-2 p-1 bg-slate-100 rounded-xl mb-6 text-xs font-bold">
+            <button 
+              id="tab-btn-login"
+              onclick="window.switchAuthTab('login')" 
+              class="py-2 rounded-lg transition-all bg-white text-slate-900 shadow-sm"
+            >
+              Đăng Nhập
+            </button>
+            <button 
+              id="tab-btn-register"
+              onclick="window.switchAuthTab('register')" 
+              class="py-2 rounded-lg transition-all text-slate-600 hover:text-slate-900"
+            >
+              Đăng Ký Thành Viên
+            </button>
+          </div>
+
+          <!-- 1. TAB ĐĂNG NHẬP -->
+          <div id="auth-tab-login" class="space-y-4">
+            
+            <!-- Quick Demo Login Presets for Testers -->
+            <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-3 text-xs space-y-2">
+              <div class="flex items-center justify-between text-[11px] font-bold text-amber-900">
+                <span><i class="fa-solid fa-bolt text-amber-500 mr-1"></i> Đăng nhập nhanh cho Tester (1-Click):</span>
+              </div>
+              <div class="grid grid-cols-3 gap-1.5">
+                <button onclick="window.fillDemoLogin('customer')" type="button" class="px-2 py-1.5 bg-white hover:bg-amber-100 text-slate-800 border border-amber-300 rounded-lg text-[11px] font-semibold text-center transition">
+                  👤 Khách hàng
+                </button>
+                <button onclick="window.fillDemoLogin('receptionist')" type="button" class="px-2 py-1.5 bg-white hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg text-[11px] font-semibold text-center transition">
+                  🏨 Lễ tân
+                </button>
+                <button onclick="window.fillDemoLogin('admin')" type="button" class="px-2 py-1.5 bg-white hover:bg-amber-100 text-purple-800 border border-amber-300 rounded-lg text-[11px] font-semibold text-center transition">
+                  ⚡ Quản trị
+                </button>
+              </div>
+            </div>
+
+            <form id="form-login" onsubmit="window.handleLoginSubmit(event)" class="space-y-3 text-xs">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Địa chỉ Email</label>
+                <div class="relative">
+                  <i class="fa-regular fa-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                  <input 
+                    type="email" 
+                    id="login-email" 
+                    placeholder="khachhang@gmail.com hoặc admin@anhduonghotel.vn" 
+                    class="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3 py-2.5 outline-none focus:border-amber-500 focus:bg-white text-slate-800 font-medium transition" 
+                    required 
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Mật khẩu</label>
+                <div class="relative">
+                  <i class="fa-solid fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                  <input 
+                    type="password" 
+                    id="login-password" 
+                    placeholder="Nhập mật khẩu..." 
+                    class="w-full bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-10 py-2.5 outline-none focus:border-amber-500 focus:bg-white text-slate-800 font-medium transition" 
+                    required 
+                  />
+                  <button 
+                    type="button" 
+                    onclick="window.togglePasswordVisibility('login-password', this)" 
+                    class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  >
+                    <i class="fa-regular fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between text-xs pt-1">
+                <label class="flex items-center gap-1.5 text-slate-600 cursor-pointer">
+                  <input type="checkbox" id="remember-me" checked class="w-4 h-4 rounded text-amber-600 focus:ring-amber-500 border-slate-300" />
+                  <span>Ghi nhớ đăng nhập</span>
+                </label>
+                <button type="button" onclick="window.switchAuthTab('forgot')" class="text-amber-700 hover:text-amber-800 font-semibold hover:underline">
+                  Quên mật khẩu?
+                </button>
+              </div>
+
+              <button 
+                type="submit" 
+                class="w-full py-3 gold-gradient text-white rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 mt-2"
+              >
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Đăng Nhập Ngay</span>
+              </button>
+            </form>
+
+            <div class="relative flex py-2 items-center">
+              <div class="flex-grow border-t border-slate-200"></div>
+              <span class="flex-shrink mx-3 text-slate-400 text-[11px]">hoặc tiếp tục với</span>
+              <div class="flex-grow border-t border-slate-200"></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <button onclick="window.mockSocialLogin('Google')" type="button" class="py-2 px-3 border border-slate-200 hover:bg-slate-50 rounded-xl font-medium text-slate-700 flex items-center justify-center gap-2 transition">
+                <i class="fa-brands fa-google text-red-500"></i>
+                <span>Google</span>
+              </button>
+              <button onclick="window.mockSocialLogin('Facebook')" type="button" class="py-2 px-3 border border-slate-200 hover:bg-slate-50 rounded-xl font-medium text-slate-700 flex items-center justify-center gap-2 transition">
+                <i class="fa-brands fa-facebook text-blue-600"></i>
+                <span>Facebook</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. TAB ĐĂNG KÝ THÀNH VIÊN -->
+          <div id="auth-tab-register" class="space-y-3 text-xs hidden">
+            <form id="form-register" onsubmit="window.handleRegisterSubmit(event)" class="space-y-3">
+              
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Họ và tên <span class="text-red-500">*</span></label>
+                <input 
+                  type="text" 
+                  id="reg-fullname" 
+                  placeholder="Ví dụ: Nguyễn Văn A" 
+                  class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none focus:border-amber-500 focus:bg-white text-slate-800 font-medium" 
+                  required 
+                />
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Số điện thoại <span class="text-red-500">*</span></label>
+                  <input 
+                    type="tel" 
+                    id="reg-phone" 
+                    placeholder="0901234567" 
+                    class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none focus:border-amber-500 focus:bg-white text-slate-800 font-medium" 
+                    required 
+                  />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Email <span class="text-red-500">*</span></label>
+                  <input 
+                    type="email" 
+                    id="reg-email" 
+                    placeholder="email@example.com" 
+                    class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none focus:border-amber-500 focus:bg-white text-slate-800 font-medium" 
+                    required 
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Mật khẩu <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <input 
+                    type="password" 
+                    id="reg-password" 
+                    oninput="window.checkPasswordStrength(this.value)"
+                    placeholder="Tối thiểu 6 ký tự..." 
+                    class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 pr-10 py-2 outline-none focus:border-amber-500 focus:bg-white text-slate-800 font-medium" 
+                    required 
+                  />
+                  <button 
+                    type="button" 
+                    onclick="window.togglePasswordVisibility('reg-password', this)" 
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  >
+                    <i class="fa-regular fa-eye"></i>
+                  </button>
+                </div>
+                <!-- Strength Meter -->
+                <div class="mt-1 flex items-center gap-1.5">
+                  <div class="flex-1 h-1 bg-slate-200 rounded-full overflow-hidden">
+                    <div id="pwd-strength-bar" class="h-full bg-rose-500 w-0 transition-all duration-300"></div>
+                  </div>
+                  <span id="pwd-strength-text" class="text-[10px] text-slate-400">Độ mạnh mật khẩu</span>
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Xác nhận mật khẩu <span class="text-red-500">*</span></label>
+                <input 
+                  type="password" 
+                  id="reg-confirm-password" 
+                  placeholder="Nhập lại mật khẩu..." 
+                  class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none focus:border-amber-500 focus:bg-white text-slate-800 font-medium" 
+                  required 
+                />
+              </div>
+
+              <div class="space-y-1.5 pt-1 text-[11px] text-slate-600">
+                <label class="flex items-start gap-2 cursor-pointer">
+                  <input type="checkbox" id="reg-agree-terms" checked class="w-4 h-4 rounded text-amber-600 focus:ring-amber-500 border-slate-300 mt-0.5" required />
+                  <span>Tôi đồng ý với <a href="#" class="text-amber-700 font-bold underline">Điều khoản sử dụng</a> & <a href="#" class="text-amber-700 font-bold underline">Chính sách bảo mật</a> của Ánh Dương Hotel.</span>
+                </label>
+                <label class="flex items-start gap-2 cursor-pointer">
+                  <input type="checkbox" id="reg-agree-promo" checked class="w-4 h-4 rounded text-amber-600 focus:ring-amber-500 border-slate-300 mt-0.5" />
+                  <span>Nhận mã giảm giá 15% độc quyền và quà tặng sinh nhật qua Email.</span>
+                </label>
+              </div>
+
+              <button 
+                type="submit" 
+                class="w-full py-3 gold-gradient text-white rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 mt-2"
+              >
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Tạo Tài Khoản Thành Viên VIP</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- 3. TAB QUÊN MẬT KHẨU -->
+          <div id="auth-tab-forgot" class="space-y-4 text-xs hidden">
+            <div class="bg-blue-50 border border-blue-200 text-blue-800 p-3 rounded-xl text-[11px] leading-relaxed">
+              <i class="fa-solid fa-circle-info mr-1 text-blue-600"></i>
+              Nhập email đã đăng ký tài khoản. Chúng tôi sẽ gửi mã xác nhận OTP gồm 6 chữ số để bạn đặt lại mật khẩu mới.
+            </div>
+
+            <form id="form-forgot" onsubmit="window.handleForgotSubmit(event)" class="space-y-3">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Địa chỉ Email tài khoản</label>
+                <input 
+                  type="email" 
+                  id="forgot-email" 
+                  placeholder="Ví dụ: khachhang@gmail.com" 
+                  class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 outline-none focus:border-amber-500 font-medium" 
+                  required 
+                />
+              </div>
+
+              <div id="otp-group" class="hidden space-y-3 pt-2 border-t border-slate-100">
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Mã OTP (Mã thử nghiệm: <code class="font-bold text-amber-700">888999</code>)</label>
+                  <input 
+                    type="text" 
+                    id="forgot-otp" 
+                    placeholder="Nhập 6 chữ số..." 
+                    class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-center font-mono font-bold tracking-widest text-base" 
+                  />
+                </div>
+                <div>
+                  <label class="block font-bold text-slate-700 mb-1">Mật khẩu mới</label>
+                  <input 
+                    type="password" 
+                    id="forgot-new-pwd" 
+                    placeholder="Nhập mật khẩu mới..." 
+                    class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none focus:border-amber-500" 
+                  />
+                </div>
+              </div>
+
+              <button 
+                type="submit" 
+                id="btn-forgot-submit"
+                class="w-full py-3 gold-gradient text-white rounded-xl font-bold text-xs uppercase tracking-wider shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2"
+              >
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Gửi Mã Xác Nhận OTP</span>
+              </button>
+            </form>
+
+            <div class="text-center pt-2">
+              <button onclick="window.switchAuthTab('login')" class="text-slate-500 hover:text-amber-700 text-xs font-semibold">
+                ← Quay lại Đăng Nhập
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= USER PROFILE & ACCOUNT MODAL ================= -->
+  <div id="profile-modal" class="fixed inset-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl p-6 sm:p-8 animate-fade-in border border-slate-200 space-y-6">
+      
+      <!-- Profile Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl gold-gradient text-white flex items-center justify-center font-bold text-xl font-serif shadow-md" id="profile-avatar-char">
+            T
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-lg text-slate-900" id="profile-fullname">Trần Hoàng Long</h3>
+            <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full" id="profile-tier">
+              Gold VIP Member
+            </span>
+          </div>
+        </div>
+        <button onclick="window.closeProfileModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Member Stats Box -->
+      <div class="grid grid-cols-2 gap-3 text-xs">
+        <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+          <span class="text-slate-400 block text-[11px]">Điểm tích lũy Ánh Dương</span>
+          <span class="font-bold text-amber-700 text-lg font-serif" id="profile-points">850 Điểm</span>
+        </div>
+        <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+          <span class="text-slate-400 block text-[11px]">Đặc quyền hạng thẻ</span>
+          <span class="font-bold text-emerald-700 text-xs">Giảm 15% đặt phòng</span>
+        </div>
+      </div>
+
+      <!-- Account Info Fields -->
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Địa chỉ Email</label>
+          <input type="email" id="profile-email-input" readonly class="w-full bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-slate-600 font-medium" />
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Số điện thoại</label>
+          <input type="tel" id="profile-phone-input" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-slate-800 font-medium outline-none focus:border-amber-500" />
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="pt-4 border-t border-slate-100 flex flex-col gap-2">
+        <a href="#tra-cuu" onclick="window.closeProfileModal()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl text-center transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-receipt text-amber-600"></i>
+          <span>Xem Lịch Sử Đơn Đặt Phòng Của Tôi</span>
+        </a>
+
+        <div class="flex gap-2">
+          <button onclick="window.updateUserProfilePhone()" class="flex-1 py-2.5 gold-gradient text-white font-bold text-xs rounded-xl shadow hover:opacity-95 transition">
+            Lưu Thay Đổi
+          </button>
+          <button onclick="window.handleLogout()" class="px-4 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs rounded-xl transition flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Đăng Xuất</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 flex items-center px-5 py-3 rounded-xl shadow-2xl text-white bg-slate-800 transition-all duration-300 transform translate-y-12 opacity-0 pointer-events-none">
+    <i id="toast-icon" class="fa-solid fa-circle-check mr-3 text-lg"></i>
+    <span id="toast-msg" class="text-xs font-medium">Thông báo hệ thống</span>
+  </div>
+
+  <!-- Application Data and Scripts -->
+  <script src="./js/data.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

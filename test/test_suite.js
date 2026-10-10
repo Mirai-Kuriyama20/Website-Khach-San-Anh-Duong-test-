@@ -2,9 +2,14 @@
  * BỘ KIỂM THỬ TỰ ĐỘNG - KHÁCH SẠN ÁNH DƯƠNG (SD21301_SOF3033)
  * Kiểm chứng 30 trường hợp lỗi và các kịch bản cốt lõi từ Kế hoạch kiểm thử Nhóm 2
  */
+const fs = require('fs');
+const path = require('path');
 
-const { isDateOverlap, releaseExpiredLocks } = require('../server/server');
-const dataMod = require('../js/data.js');
+const serverModPath = fs.existsSync(path.join(__dirname, '../backend/server.js')) ? '../backend/server.js' : '../server/server.js';
+const dataModPath = fs.existsSync(path.join(__dirname, '../frontend/js/data.js')) ? '../frontend/js/data.js' : '../js/data.js';
+
+const { isDateOverlap, releaseExpiredLocks } = require(serverModPath);
+const dataMod = require(dataModPath);
 
 let passCount = 0;
 let failCount = 0;

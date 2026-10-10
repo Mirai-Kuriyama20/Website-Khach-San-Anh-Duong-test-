@@ -1,0 +1,117 @@
+﻿/* Custom Luxury 5-Star Hotel CSS for Khách Sạn Ánh Dương */
+:root {
+  --primary-gold: #c59d5f;
+  --primary-gold-dark: #9e7538;
+  --primary-gold-light: #dfba7e;
+  --navy-dark: #09131f;
+  --navy-slate: #152238;
+  --navy-light: #1e293b;
+  --accent-cream: #faf7f2;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #1e293b;
+  background-color: #f8fafc;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, .font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Custom gold gradient */
+.gold-gradient {
+  background: linear-gradient(135deg, #dfba7e 0%, #c59d5f 50%, #9e7538 100%);
+}
+
+.gold-text-gradient {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border {
+  border-color: #c59d5f;
+}
+
+/* Luxury card hover */
+.room-card {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.room-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.15);
+}
+
+/* Hero Overlay */
+.hero-bg {
+  background-image: linear-gradient(rgba(9, 19, 31, 0.65), rgba(9, 19, 31, 0.8)), url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=2000&q=85');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Modal styles */
+.modal-backdrop {
+  backdrop-filter: blur(6px);
+  background-color: rgba(9, 19, 31, 0.7);
+}
+
+/* Room Rack Matrix Badges */
+.rack-badge-available {
+  background-color: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.rack-badge-occupied {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.rack-badge-reserved {
+  background-color: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.rack-badge-maintenance {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Print styles for invoice */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #invoice-print-area, #invoice-print-area * {
+    visibility: visible;
+  }
+  #invoice-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    background: white;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
